@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.control;
 
+import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.MainWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +25,13 @@ public class MyController {
         this.view.getPlus().setOnAction(e -> plusTime());
         this.view.getMinus().setOnAction(e -> minusTime());
 
+        //Initial DB
+        SQLiteConnectModel sqlModel = new SQLiteConnectModel();
+        sqlModel.connect();
+        sqlModel.createTable();
+
+        //Set Data
+        sqlModel.insertImagePath("/images/start.png");
     }
 
     private void updateTimer() {
