@@ -50,12 +50,15 @@ public class MyController {
                 //System.out.println("% : " + progress / 20);
 
                 // check stage and image length
-                if(stage >= 0 && stage < view.getPlantStages().length) {
+                if (stage >= 0 && stage < view.getPlantStages().length) {
                     view.getPlantImageView().setImage(view.getPlantStages()[stage]);
                 }
             }
         }
-        else {
+        else if (remainingTime == 0){
+            // Finish Timer
+            view.getStatus().setText("Great Job!");
+        }else {
             // Timer-Ende
             pauseTimer();
         }
@@ -71,7 +74,7 @@ public class MyController {
         }else {
             //Pause
             timeline.play();
-            view.getStatus().setText("Do not give up!");
+            view.getStatus().setText("Pause ? Do not give up!");
         }
     }
 

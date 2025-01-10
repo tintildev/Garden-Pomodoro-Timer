@@ -15,7 +15,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         MainWindow view = new MainWindow();
         MyController controller = new MyController(view);
-        Scene scene = new Scene(view.getRoot(), 320, 240);
+        Scene scene = new Scene(view.getRoot(), 280, 420);
 
         //Set Icon and check
         InputStream iconStream = getClass().getResourceAsStream("/images/Icon.png");
