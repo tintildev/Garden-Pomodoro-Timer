@@ -6,6 +6,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class MyController {
     private MainWindow view;
     private int workTime = 25 * 60; // 25 Minuten
@@ -25,6 +27,9 @@ public class MyController {
         this.view.getPlus().setOnAction(e -> plusTime());
         this.view.getMinus().setOnAction(e -> minusTime());
 
+        view.initialTrees(new ArrayList<String>());
+
+        //Todo:: weiter mit Datenbank
         //Initial DB
         SQLiteConnectModel sqlModel = new SQLiteConnectModel();
         sqlModel.connect();
@@ -51,6 +56,8 @@ public class MyController {
 
                 // check stage and image length
                 if (stage >= 0 && stage < view.getPlantStages().length) {
+                    //set ImageView image stage
+                    //Todo:: set DB Data (arraylist ?) imagepaths
                     view.getPlantImageView().setImage(view.getPlantStages()[stage]);
                 }
             }

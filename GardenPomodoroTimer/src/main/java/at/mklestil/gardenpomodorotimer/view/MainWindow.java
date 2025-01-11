@@ -32,7 +32,7 @@ public class MainWindow {
         //Timer
         VBox vBox = new VBox(5);
         HBox hbox = new HBox(5);
-        initialTrees();
+        startTree();
         plantImageView = new ImageView(plantStages[0]);
         plantImageView.setFitWidth(150);
         plantImageView.setFitHeight(150);
@@ -75,16 +75,33 @@ public class MainWindow {
 
     }
 
-    public void initialTrees(){
-        //Image Path, in the future delete hard code
-        ArrayList<String> imagePath = new ArrayList<>();
-        imagePath.add("/images/start.png");
-        imagePath.add("/images/1_tree.png");
-        imagePath.add("/images/2_tree.png");
-        imagePath.add("/images/3_tree.png");
-        imagePath.add("/images/4_tree.png");
-        imagePath.add("/images/5_tree.png");
+    public void startTree(){
+        InputStream inputStream = getClass().getResourceAsStream("/images/start.png");
+        if(inputStream != null){
+            //Check Image is correct
+            Image image = new Image(inputStream);
+            if(!image.isError()){
+                plantStages[0] = image;
+            }else {
+                System.out.println("Error loading image: " + "/images/start.png");
+            }
+        }else{
+            System.out.println("Image file not found.");
+        }
+    }
 
+    public void initialTrees(ArrayList<String> listImagePath){
+        ArrayList<String> imagePath = new ArrayList<>();
+        imagePath = listImagePath;
+        if(listImagePath.size() == 0){
+            //Image Path, in the future delete hard codes
+            imagePath.add("/images/1_tree.png");
+            imagePath.add("/images/2_tree.png");
+            imagePath.add("/images/3_tree.png");
+            imagePath.add("/images/4_tree.png");
+            imagePath.add("/images/5_tree.png");
+            imagePath.add("/images/6_tree.png");
+        }
         // Add img plantStages
         for (int i = 0; i < imagePath.size(); i++){
             //Check Stream Path
