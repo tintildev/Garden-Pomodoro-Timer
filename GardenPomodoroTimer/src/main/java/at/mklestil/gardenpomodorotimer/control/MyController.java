@@ -36,7 +36,7 @@ public class MyController {
         sqlModel.createTable();
 
         //Set Data
-        sqlModel.insertImagePath("/images/start.png");
+        sqlModel.insertImagePath("/images/start/start.png");
     }
 
     private void updateTimer() {

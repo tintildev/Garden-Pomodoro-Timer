@@ -33,7 +33,7 @@ public class SQLiteConnectModel {
                 """;
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Tabelle 'images' erstellt (falls nicht vorhanden).");
+            //System.out.println("Tabelle 'images' erstellt (falls nicht vorhanden).");
         } catch (SQLException e) {
             System.out.println("Fehler beim Erstellen der Tabelle: " + e.getMessage());
         }

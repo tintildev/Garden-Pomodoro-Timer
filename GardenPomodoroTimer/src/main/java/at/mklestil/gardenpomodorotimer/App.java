@@ -1,6 +1,7 @@
 package at.mklestil.gardenpomodorotimer;
 
 import at.mklestil.gardenpomodorotimer.control.MyController;
+import at.mklestil.gardenpomodorotimer.control.SceneManger;
 import at.mklestil.gardenpomodorotimer.view.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,10 +14,28 @@ import java.io.InputStream;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        //Add SceneManger
+        SceneManger sceneManger = new SceneManger(stage);
+
+        //Start View
         MainWindow view = new MainWindow();
         MyController controller = new MyController(view);
-        Scene scene = new Scene(view.getRoot(), 280, 420);
+        Scene startScene = new Scene(view.getRoot(), 280, 420);
+        sceneManger.addScene("start", startScene);
 
+
+
+        //start first scene
+        sceneManger.switchTo("start");
+
+        //set Icon, title
+        setMyIcon(stage);
+        stage.setTitle("Pomodoro Timer");
+        stage.show();
+
+    }
+
+    public void setMyIcon(Stage stage){
         //Set Icon and check
         InputStream iconStream = getClass().getResourceAsStream("/images/Icon.png");
         if(iconStream != null){
@@ -29,11 +48,6 @@ public class App extends Application {
         } else {
             System.out.println("Icon file not found.");
         }
-
-        stage.setTitle("Pomodoro Timer");
-        stage.setScene(scene);
-        stage.show();
-
     }
 
     public static void main(String[] args) {

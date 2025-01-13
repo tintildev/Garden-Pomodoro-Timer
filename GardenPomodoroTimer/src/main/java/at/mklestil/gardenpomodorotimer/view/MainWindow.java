@@ -76,14 +76,14 @@ public class MainWindow {
     }
 
     public void startTree(){
-        InputStream inputStream = getClass().getResourceAsStream("/images/start.png");
+        InputStream inputStream = getClass().getResourceAsStream("/images/start/start.png");
         if(inputStream != null){
             //Check Image is correct
             Image image = new Image(inputStream);
             if(!image.isError()){
                 plantStages[0] = image;
             }else {
-                System.out.println("Error loading image: " + "/images/start.png");
+                System.out.println("Error loading image: " + "/images/start/start.png");
             }
         }else{
             System.out.println("Image file not found.");
@@ -95,12 +95,12 @@ public class MainWindow {
         imagePath = listImagePath;
         if(listImagePath.size() == 0){
             //Image Path, in the future delete hard codes
-            imagePath.add("/images/1_tree.png");
-            imagePath.add("/images/2_tree.png");
-            imagePath.add("/images/3_tree.png");
-            imagePath.add("/images/4_tree.png");
-            imagePath.add("/images/5_tree.png");
-            imagePath.add("/images/6_tree.png");
+            imagePath.add("/images/appletree/1_tree.png");
+            imagePath.add("/images/appletree/2_tree.png");
+            imagePath.add("/images/appletree/3_tree.png");
+            imagePath.add("/images/appletree/4_tree.png");
+            imagePath.add("/images/appletree/5_tree.png");
+            imagePath.add("/images/appletree/6_tree.png");
         }
         // Add img plantStages
         for (int i = 0; i < imagePath.size(); i++){
