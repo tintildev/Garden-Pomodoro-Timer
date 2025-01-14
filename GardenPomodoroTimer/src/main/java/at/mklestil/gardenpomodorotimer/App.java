@@ -1,7 +1,9 @@
 package at.mklestil.gardenpomodorotimer;
 
+import at.mklestil.gardenpomodorotimer.control.ChosePlantController;
 import at.mklestil.gardenpomodorotimer.control.MyController;
 import at.mklestil.gardenpomodorotimer.control.SceneManger;
+import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import at.mklestil.gardenpomodorotimer.view.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class App extends Application {
+    private int appWidth = 280;
+    private int appHeight = 420;
+
     @Override
     public void start(Stage stage) throws IOException {
         //Add SceneManger
@@ -19,11 +24,15 @@ public class App extends Application {
 
         //Start View
         MainWindow view = new MainWindow();
-        MyController controller = new MyController(view);
-        Scene startScene = new Scene(view.getRoot(), 280, 420);
+        MyController controller = new MyController(view, sceneManger);
+        Scene startScene = new Scene(view.getRoot(), appWidth, appHeight);
         sceneManger.addScene("start", startScene);
 
-
+        //ChosePlant
+        ChosePlant chosePlantView = new ChosePlant();
+        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView);
+        Scene choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
+        sceneManger.addScene("chose", choseScene);
 
         //start first scene
         sceneManger.switchTo("start");

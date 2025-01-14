@@ -4,7 +4,9 @@ import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.MainWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
+import org.w3c.dom.events.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -16,9 +18,12 @@ public class MyController {
     private String formatTime;
     private int progress = 0;
 
+    private final SceneManger sceneManger;
 
-    public MyController(MainWindow view) {
+
+    public MyController(MainWindow view, SceneManger sManger) {
         this.view = view;
+        sceneManger = sManger;
         formatTime = view.getTimeLabel().getText();
         this.view.getStartButton().setOnAction(e -> startTimer());
         this.view.getBreakButton().setOnAction(e -> pauseTimer());
@@ -28,6 +33,10 @@ public class MyController {
         this.view.getMinus().setOnAction(e -> minusTime());
 
         view.initialTrees(new ArrayList<String>());
+
+        view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+            sceneManger.switchTo("chose");
+        });
 
         //Todo:: weiter mit Datenbank
         //Initial DB
