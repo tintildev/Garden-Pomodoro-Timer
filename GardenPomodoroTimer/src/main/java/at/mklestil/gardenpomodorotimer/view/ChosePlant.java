@@ -24,8 +24,8 @@ public class ChosePlant {
     public ChosePlant(){
         root = new VBox();
         FlowPane plantContainer = new FlowPane();
-        HBox fokusTimeContainer = new HBox();
-        HBox tagsContainer = new HBox();
+        HBox fokusTimeContainer = getFocusTimeContainer();
+        HBox tagsContainer = getTagsContainer(new ArrayList<String>());
         FlowPane choseContainer = getChoseContainer();
 
         root.getChildren().add(plantContainer);
@@ -36,6 +36,7 @@ public class ChosePlant {
     }
 
     private FlowPane getChoseContainer (){
+        //Todo:: Data from db
         FlowPane choseContainer = new FlowPane();
         Label timeLabel = new Label("+" +timeChose);
         Label tagLabel = new Label(tagChose);
@@ -51,6 +52,39 @@ public class ChosePlant {
         choseContainer.getChildren().add(startBtn);
 
         return choseContainer;
+    }
+
+    private HBox getFocusTimeContainer (){
+        HBox timesContainer = new HBox();
+        ArrayList<Integer> times = new ArrayList<Integer>();
+        times.add(10);
+        times.add(15);
+        times.add(25);
+        times.add(30);
+        times.add(50);
+        times.add(60);
+        times.add(90);
+        times.add(120);
+        for(Integer number : times){
+            timesContainer.getChildren().add(new Label("" + number));
+        }
+        timesContainer.setSpacing(10);
+
+        return timesContainer;
+    }
+
+    private HBox getTagsContainer(ArrayList<String> tagsList){
+        //Todo:: Data from db
+        HBox tagsContainer = new HBox();
+        if(tagsList.size() == 0 || tagsList == null){
+            tagsContainer.getChildren().add(new Label("no tag"));
+        }else{
+            for(String tags : tagsList){
+                Label temp = new Label(tags);
+                tagsContainer.getChildren().add(temp);
+            }
+        }
+        return tagsContainer;
     }
 
     private void showListOfTrees(){
