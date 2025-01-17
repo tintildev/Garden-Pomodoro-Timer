@@ -4,14 +4,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 
 public class ChosePlant {
     private VBox root;
@@ -23,7 +21,7 @@ public class ChosePlant {
 
     public ChosePlant(){
         root = new VBox();
-        FlowPane plantContainer = new FlowPane();
+        FlowPane plantContainer = getPlantContainer();
         HBox fokusTimeContainer = getFocusTimeContainer();
         HBox tagsContainer = getTagsContainer(new ArrayList<String>());
         FlowPane choseContainer = getChoseContainer();
@@ -33,6 +31,27 @@ public class ChosePlant {
         root.getChildren().add(tagsContainer);
         root.getChildren().add(choseContainer);
 
+    }
+
+    private FlowPane getPlantContainer(){
+        FlowPane plantContainer = new FlowPane();
+        //Todo:: dynamic plants form db
+        ArrayList<String> plantList = new ArrayList<>();
+        plantList.add("/images/appletree/6_tree.png");
+        plantList.add("/images/conifer/6_tree.png");
+        plantList.add("/images/fall/6_tree.png");
+        plantList.add("/images/round/6_tree.png");
+
+        for(String name : plantList){
+            InputStream inputStream1 = getClass().getResourceAsStream(name);
+            Image plantImg1 = new Image(inputStream1);
+            ImageView plantView1 = new ImageView(plantImg1);
+            plantView1.setFitWidth(50);
+            plantView1.setFitHeight(50);
+            plantContainer.getChildren().add(plantView1);
+        }
+
+        return plantContainer;
     }
 
     private FlowPane getChoseContainer (){
