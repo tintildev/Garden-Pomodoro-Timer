@@ -30,7 +30,7 @@ public class App extends Application {
 
         //ChosePlant
         ChosePlant chosePlantView = new ChosePlant();
-        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView);
+        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView, sceneManger);
         Scene choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
         sceneManger.addScene("chose", choseScene);
 
