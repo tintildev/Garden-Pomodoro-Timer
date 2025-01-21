@@ -1,17 +1,15 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
-import at.mklestil.gardenpomodorotimer.view.MainWindow;
+import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.util.Duration;
-import org.w3c.dom.events.MouseEvent;
 
 import java.util.ArrayList;
 
-public class MyController {
-    private MainWindow view;
+public class StartWindowController {
+    private StartWindow view;
     private int workTime = 25 * 60; // 25 Minuten
     private int remainingTime = workTime;
     private Timeline timeline;
@@ -21,7 +19,7 @@ public class MyController {
     private final SceneManger sceneManger;
 
 
-    public MyController(MainWindow view, SceneManger sManger) {
+    public StartWindowController(StartWindow view, SceneManger sManger) {
         this.view = view;
         sceneManger = sManger;
         formatTime = view.getTimeLabel().getText();
@@ -34,6 +32,7 @@ public class MyController {
 
         view.initialTrees(new ArrayList<String>());
 
+        //Switch Scene
         view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
             sceneManger.switchTo("chose");
         });
@@ -139,6 +138,9 @@ public class MyController {
 
     public int getWorkTime() {
         return workTime;
+    }
+    public void setWorkTime(int time){
+        workTime = time;
     }
 
     public int getRemainingTime() {

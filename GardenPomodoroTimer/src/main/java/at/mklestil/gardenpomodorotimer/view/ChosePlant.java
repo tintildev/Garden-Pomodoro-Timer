@@ -19,6 +19,8 @@ public class ChosePlant {
     private ArrayList<String> listOfPlants;
     private Image plantImage;
 
+    private Button startBtn;
+
     public ChosePlant(){
         root = new VBox();
         FlowPane plantContainer = getPlantContainer();
@@ -64,7 +66,7 @@ public class ChosePlant {
         ImageView imageView = new ImageView(plantImage);
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
-        Button startBtn = new Button("start");
+        startBtn = new Button("start");
         choseContainer.getChildren().add(timeLabel);
         choseContainer.getChildren().add(imageView);
         choseContainer.getChildren().add(tagLabel);
@@ -124,5 +126,9 @@ public class ChosePlant {
 
     public ArrayList<String> getListOfPlants(){
         return listOfPlants;
+    }
+
+    public Button getStartBtn(){
+        return startBtn;
     }
 }

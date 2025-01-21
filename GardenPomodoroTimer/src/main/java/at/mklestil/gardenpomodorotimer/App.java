@@ -1,10 +1,11 @@
 package at.mklestil.gardenpomodorotimer;
 
 import at.mklestil.gardenpomodorotimer.control.ChosePlantController;
-import at.mklestil.gardenpomodorotimer.control.MyController;
+import at.mklestil.gardenpomodorotimer.control.MainController;
+import at.mklestil.gardenpomodorotimer.control.StartWindowController;
 import at.mklestil.gardenpomodorotimer.control.SceneManger;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
-import at.mklestil.gardenpomodorotimer.view.MainWindow;
+import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,14 +18,20 @@ public class App extends Application {
     private int appWidth = 280;
     private int appHeight = 420;
 
+    private MainController mainController;
+
     @Override
     public void start(Stage stage) throws IOException {
+        //start MainController
+        mainController = new MainController();
+
         //Add SceneManger
         SceneManger sceneManger = new SceneManger(stage);
 
         //Start View
-        MainWindow view = new MainWindow();
-        MyController controller = new MyController(view, sceneManger);
+        StartWindow view = new StartWindow();
+        StartWindowController controller = new StartWindowController(view, sceneManger);
+        mainController.addController(controller);
         Scene startScene = new Scene(view.getRoot(), appWidth, appHeight);
         sceneManger.addScene("start", startScene);
 

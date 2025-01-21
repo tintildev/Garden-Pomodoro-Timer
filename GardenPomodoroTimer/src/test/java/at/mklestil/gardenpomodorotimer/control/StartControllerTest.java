@@ -1,7 +1,8 @@
 package at.mklestil.gardenpomodorotimer.control;
 
-import at.mklestil.gardenpomodorotimer.view.MainWindow;
+import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Platform;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyControllerTest {
+class StartControllerTest {
 
-    private MyController controller;
-    private MainWindow view;  // use Mock or Dummy-View
+    private StartWindowController controller;
+    private StartWindow view;  // use Mock or Dummy-View
+    private SceneManger sceneManger;
 
     @BeforeAll
     static void initJfxRuntime() {
@@ -22,8 +24,9 @@ class MyControllerTest {
 
     @BeforeEach
     void setUp() {
-        view = new MainWindow();
-        controller = new MyController(view);
+        view = new StartWindow();
+        sceneManger = new SceneManger(new Stage());
+        controller = new StartWindowController(view, sceneManger);
     }
 
     @Test

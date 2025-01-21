@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainWindow {
+public class StartWindow {
     private BorderPane root;
     private Label status;
     private Button plus = new Button("+");
@@ -26,7 +26,7 @@ public class MainWindow {
     private final Image[] plantStages = new Image[6];
     private ImageView plantImageView;
 
-    public MainWindow() {
+    public StartWindow() {
         root = new BorderPane();
 
         //Timer
