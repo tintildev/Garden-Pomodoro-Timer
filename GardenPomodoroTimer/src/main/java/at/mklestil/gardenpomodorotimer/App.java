@@ -1,9 +1,8 @@
 package at.mklestil.gardenpomodorotimer;
 
 import at.mklestil.gardenpomodorotimer.control.ChosePlantController;
-import at.mklestil.gardenpomodorotimer.control.MainController;
 import at.mklestil.gardenpomodorotimer.control.StartWindowController;
-import at.mklestil.gardenpomodorotimer.control.SceneManger;
+import at.mklestil.gardenpomodorotimer.control.MainController;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Application;
@@ -18,31 +17,27 @@ public class App extends Application {
     private int appWidth = 280;
     private int appHeight = 420;
 
-    private MainController mainController;
 
     @Override
     public void start(Stage stage) throws IOException {
-        //start MainController
-        mainController = new MainController();
 
-        //Add SceneManger
-        SceneManger sceneManger = new SceneManger(stage);
+        //Add Main Controller to controll data and scenes
+        MainController mainController = new MainController(stage);
 
         //Start View
         StartWindow view = new StartWindow();
-        StartWindowController controller = new StartWindowController(view, sceneManger);
-        mainController.addController(controller);
+        StartWindowController controller = new StartWindowController(view, mainController);
         Scene startScene = new Scene(view.getRoot(), appWidth, appHeight);
-        sceneManger.addScene("start", startScene);
+        mainController.addScene("start", startScene);
 
         //ChosePlant
         ChosePlant chosePlantView = new ChosePlant();
-        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView, sceneManger);
+        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView, mainController);
         Scene choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
-        sceneManger.addScene("chose", choseScene);
+        mainController.addScene("chose", choseScene);
 
         //start first scene
-        sceneManger.switchTo("start");
+        mainController.switchTo("start");
 
         //set Icon, title
         setMyIcon(stage);

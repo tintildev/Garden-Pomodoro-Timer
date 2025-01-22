@@ -16,12 +16,13 @@ public class StartWindowController {
     private String formatTime;
     private int progress = 0;
 
-    private final SceneManger sceneManger;
+    private final MainController mainController;
 
 
-    public StartWindowController(StartWindow view, SceneManger sManger) {
+    public StartWindowController(StartWindow view, MainController sManger) {
         this.view = view;
-        sceneManger = sManger;
+        mainController = sManger;
+        workTime = mainController.getTimeChose() * 60;
         formatTime = view.getTimeLabel().getText();
         this.view.getStartButton().setOnAction(e -> startTimer());
         this.view.getBreakButton().setOnAction(e -> pauseTimer());
@@ -34,7 +35,7 @@ public class StartWindowController {
 
         //Switch Scene
         view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-            sceneManger.switchTo("chose");
+            mainController.switchTo("chose");
         });
 
         //Todo:: weiter mit Datenbank

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ChosePlantController {
     private final ChosePlant view;
 
-    private final SceneManger sceneManger;
+    private final MainController mainController;
 
     private String chose = "";
     private int timeChose = 25;
@@ -17,15 +17,17 @@ public class ChosePlantController {
     private Image plantImage;
 
 
-    public ChosePlantController(ChosePlant viewChosePlant, SceneManger scene){
+    public ChosePlantController(ChosePlant viewChosePlant, MainController scene){
         view = viewChosePlant;
-        sceneManger = scene;
+        mainController = scene;
 
 
         view.getStartBtn().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-            sceneManger.switchTo("start");
+            mainController.switchTo("start");
+            mainController.setChose(chose);
+            mainController.setTagChose(chose);
+            mainController.setTimeChose(timeChose);
 
-            //TODO:: data to MyController
 
         });
     }
