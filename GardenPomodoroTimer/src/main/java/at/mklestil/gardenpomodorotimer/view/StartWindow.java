@@ -22,7 +22,7 @@ public class StartWindow {
     private Button startButton = new Button("Start");
     private Button breakButton = new Button("Break");
     private Button resetButton = new Button("Rest");
-    private Label time;
+    private Label timeLabel;
     private final Image[] plantStages = new Image[6];
     private ImageView plantImageView;
 
@@ -47,21 +47,21 @@ public class StartWindow {
         status = new Label("Ready to start!");
         status.setFont(Font.font("Roboto", 20));
         status.setTextFill(Color.WHITE);
-        time = new Label("25:00");
-        time.setFont(new Font("Roboto", 40));
-        time.setTextFill(Color.WHITE);
+        timeLabel = new Label("25:00");
+        timeLabel.setFont(new Font("Roboto", 40));
+        timeLabel.setTextFill(Color.WHITE);
 
         //Add root
         root.setTop(status);
         root.setCenter(vBox);
-        root.setBottom(time);
+        root.setBottom(timeLabel);
 
         //Center Elements
         hbox.setStyle("-fx-alignment: center;");
         buttonBox.setStyle("-fx-alignment: center;");
         vBox.setStyle("-fx-alignment: center;");
         BorderPane.setAlignment(status, Pos.CENTER);
-        BorderPane.setAlignment(time, Pos.CENTER);
+        BorderPane.setAlignment(timeLabel, Pos.CENTER);
 
         // create Background
         BackgroundFill backgroundFill = new BackgroundFill(
@@ -153,16 +153,16 @@ public class StartWindow {
         return resetButton;
     }
 
-    public Label getTimeLabel() {
-        return time;
-    }
-
     public Image[] getPlantStages() {
         return plantStages;
     }
 
     public ImageView getPlantImageView() {
         return plantImageView;
+    }
+
+    public Label getTimeLabel() {
+        return timeLabel;
     }
 
     public void setPlantImageView(ImageView plantImageView) {

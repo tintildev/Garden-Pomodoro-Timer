@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -87,7 +88,12 @@ public class ChosePlant {
         times.add(90);
         times.add(120);
         for(Integer number : times){
-            timesContainer.getChildren().add(new Label("" + number));
+            Button tempTimeLabel = new Button("" + number);
+            tempTimeLabel.setMinSize(40, 30);
+            tempTimeLabel.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+                timeChose = number;
+            });
+            timesContainer.getChildren().add(tempTimeLabel);
         }
         timesContainer.setSpacing(10);
 
@@ -130,5 +136,29 @@ public class ChosePlant {
 
     public Button getStartBtn(){
         return startBtn;
+    }
+
+    public String getChose() {
+        return chose;
+    }
+
+    public void setChose(String chose) {
+        this.chose = chose;
+    }
+
+    public int getTimeChose() {
+        return timeChose;
+    }
+
+    public void setTimeChose(int timeChose) {
+        this.timeChose = timeChose;
+    }
+
+    public String getTagChose() {
+        return tagChose;
+    }
+
+    public void setTagChose(String tagChose) {
+        this.tagChose = tagChose;
     }
 }

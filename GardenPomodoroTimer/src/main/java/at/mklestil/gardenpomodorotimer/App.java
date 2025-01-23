@@ -3,6 +3,7 @@ package at.mklestil.gardenpomodorotimer;
 import at.mklestil.gardenpomodorotimer.control.ChosePlantController;
 import at.mklestil.gardenpomodorotimer.control.StartWindowController;
 import at.mklestil.gardenpomodorotimer.control.MainController;
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Application;
@@ -14,30 +15,15 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class App extends Application {
-    private int appWidth = 280;
-    private int appHeight = 420;
-
 
     @Override
     public void start(Stage stage) throws IOException {
+        AppModel model = new AppModel();
 
         //Add Main Controller to controll data and scenes
-        MainController mainController = new MainController(stage);
-
-        //Start View
-        StartWindow view = new StartWindow();
-        StartWindowController controller = new StartWindowController(view, mainController);
-        Scene startScene = new Scene(view.getRoot(), appWidth, appHeight);
-        mainController.addScene("start", startScene);
-
-        //ChosePlant
-        ChosePlant chosePlantView = new ChosePlant();
-        ChosePlantController chosePlantController = new ChosePlantController(chosePlantView, mainController);
-        Scene choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
-        mainController.addScene("chose", choseScene);
-
-        //start first scene
-        mainController.switchTo("start");
+        MainController mainController = new MainController(stage, model);
+        mainController.initializeScenes();
+        mainController.startApp();
 
         //set Icon, title
         setMyIcon(stage);

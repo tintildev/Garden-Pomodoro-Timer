@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.control;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
@@ -15,21 +16,26 @@ public class StartWindowController {
     private Timeline timeline;
     private String formatTime;
     private int progress = 0;
+    private MainController mainController;
+    private AppModel model;
 
-    private final MainController mainController;
 
 
     public StartWindowController(StartWindow view, MainController sManger) {
         this.view = view;
         mainController = sManger;
-        workTime = mainController.getTimeChose() * 60;
-        formatTime = view.getTimeLabel().getText();
-        this.view.getStartButton().setOnAction(e -> startTimer());
-        this.view.getBreakButton().setOnAction(e -> pauseTimer());
-        this.view.getResetButton().setOnAction(e -> resetTimer());
+        model = mainController.getModel();
+        initialize();
+    }
 
-        this.view.getPlus().setOnAction(e -> plusTime());
-        this.view.getMinus().setOnAction(e -> minusTime());
+    public void initialize(){
+        formatTime = view.getTimeLabel().getText();
+        view.getStartButton().setOnAction(e -> startTimer());
+        view.getBreakButton().setOnAction(e -> pauseTimer());
+        view.getResetButton().setOnAction(e -> resetTimer());
+
+        view.getPlus().setOnAction(e -> plusTime());
+        view.getMinus().setOnAction(e -> minusTime());
 
         view.initialTrees(new ArrayList<String>());
 
@@ -37,15 +43,12 @@ public class StartWindowController {
         view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
             mainController.switchTo("chose");
         });
-
-        //Todo:: weiter mit Datenbank
-        //Initial DB
-        SQLiteConnectModel sqlModel = new SQLiteConnectModel();
-        sqlModel.connect();
-        sqlModel.createTable();
-
-        //Set Data
-        sqlModel.insertImagePath("/images/start/start.png");
+    }
+    public void updateView(){
+        System.out.println("Scene switch to Start, update view!");
+        setWorkTime(model.getTime() * 60);
+        remainingTime = workTime;
+        view.getTimeLabel().setText(formatTime(remainingTime));
     }
 
     private void updateTimer() {
@@ -133,26 +136,11 @@ public class StartWindowController {
         return formatTime;
     }
 
-    public String getFormatTime() {
-        return formatTime;
-    }
-
-    public int getWorkTime() {
-        return workTime;
-    }
     public void setWorkTime(int time){
         workTime = time;
     }
 
     public int getRemainingTime() {
         return remainingTime;
-    }
-
-    public Timeline getTimeline() {
-        return timeline;
-    }
-
-    public int getProgress() {
-        return progress;
     }
 }

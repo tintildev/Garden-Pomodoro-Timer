@@ -1,5 +1,9 @@
 package at.mklestil.gardenpomodorotimer.control;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
+import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
+import at.mklestil.gardenpomodorotimer.view.ChosePlant;
+import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,56 +14,61 @@ public class MainController {
 
     private final Stage stage;
     private Scene mainScene;
-    private final Map<String, Scene> scenes = new HashMap<>();
-    private String chose = "";
-    private int timeChose = 25;
-    private String tagChose = "learn";
+    private AppModel model;
+    private int appWidth = 280;
+    private int appHeight = 420;
+    private Scene startScene;
+    private Scene choseScene;
+    private StartWindowController startController;
+    private ChosePlantController chosePlantController;
 
-    public MainController(Stage stage) {
+    public MainController(Stage stage, AppModel model) {
+        this.model = model;
         this.stage = stage;
     }
+    public void initializeScenes(){
+        //Start View
+        StartWindow view = new StartWindow();
+        startController = new StartWindowController(view, this);
+        startScene = new Scene(view.getRoot(), appWidth, appHeight);
 
-    public void addScene(String name, Scene scene) {
-        //add scenes to hashmap
-        scenes.put(name, scene);
+        //ChosePlant
+        ChosePlant chosePlantView = new ChosePlant();
+        chosePlantController = new ChosePlantController(chosePlantView, this);
+        choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
+    }
+
+    public void startApp(){
+        switchTo("start");
     }
 
     public void switchTo(String name) {
         //show scene
-        mainScene = scenes.get(name);
-        if(mainScene!= null){
-            stage.setScene(scenes.get(name));
+        if(name.equals("start")){
+            stage.setScene(startScene);
+            startController.updateView();
+        }
+        if(name.equals("chose")){
+            stage.setScene(choseScene);
         }else {
             System.out.println("Error: Scene " + name +" not found");
         }
+
     }
 
-    public Scene getMainScene(){
-        return mainScene;
+    public AppModel getModel() {
+        return model;
     }
 
-    public String getChose() {
-        return chose;
-    }
+    public void startDB(){
+        //Todo:: weiter mit Datenbank
+        //Initial DB
+        SQLiteConnectModel sqlModel = new SQLiteConnectModel();
+        sqlModel.connect();
+        sqlModel.createTable();
 
-    public void setChose(String chose) {
-        this.chose = chose;
-    }
-
-    public int getTimeChose() {
-        return timeChose;
-    }
-
-    public void setTimeChose(int timeChose) {
-        this.timeChose = timeChose;
-    }
-
-    public String getTagChose() {
-        return tagChose;
-    }
-
-    public void setTagChose(String tagChose) {
-        this.tagChose = tagChose;
+        //Set Data
+        sqlModel.insertImagePath("/images/start/start.png");
     }
 }
 
