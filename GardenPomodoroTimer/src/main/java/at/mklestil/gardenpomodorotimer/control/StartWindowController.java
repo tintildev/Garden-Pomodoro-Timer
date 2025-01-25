@@ -36,7 +36,7 @@ public class StartWindowController {
 
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
-
+        view.getLearnTag().setText(model.getTag());
         view.initialTrees(new ArrayList<String>());
 
         //Switch Scene
@@ -46,6 +46,7 @@ public class StartWindowController {
     }
     public void updateView(){
         System.out.println("Scene switch to Start, update view!");
+        view.getLearnTag().setText(model.getTag());
         setWorkTime(model.getTime() * 60);
         remainingTime = workTime;
         view.getTimeLabel().setText(formatTime(remainingTime));

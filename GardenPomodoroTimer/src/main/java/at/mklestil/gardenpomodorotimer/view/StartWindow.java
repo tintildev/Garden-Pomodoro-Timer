@@ -19,6 +19,7 @@ public class StartWindow {
     private Button plus = new Button("+");
     private Button minus = new Button("-");
     private ProgressBar progress;
+    private Label learnTag = new Label("");
     private Button startButton = new Button("Start");
     private Button breakButton = new Button("Break");
     private Button resetButton = new Button("Rest");
@@ -40,7 +41,7 @@ public class StartWindow {
         hbox.getChildren().addAll(plus, progress, minus);
         HBox buttonBox = new HBox(5);
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
-        vBox.getChildren().addAll(plantImageView, hbox, buttonBox);
+        vBox.getChildren().addAll(plantImageView, learnTag, hbox, buttonBox);
 
 
         //Status and Time
@@ -167,5 +168,13 @@ public class StartWindow {
 
     public void setPlantImageView(ImageView plantImageView) {
         this.plantImageView = plantImageView;
+    }
+
+    public Label getLearnTag() {
+        return learnTag;
+    }
+
+    public void setLearnTag(Label learnTag) {
+        this.learnTag = learnTag;
     }
 }
