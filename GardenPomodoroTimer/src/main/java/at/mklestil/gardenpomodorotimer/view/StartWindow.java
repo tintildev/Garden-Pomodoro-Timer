@@ -96,12 +96,12 @@ public class StartWindow {
         imagePath = listImagePath;
         if(listImagePath.size() == 0){
             //Image Path, in the future delete hard codes
-            imagePath.add("/images/appletree/1_tree.png");
-            imagePath.add("/images/appletree/2_tree.png");
-            imagePath.add("/images/appletree/3_tree.png");
-            imagePath.add("/images/appletree/4_tree.png");
-            imagePath.add("/images/appletree/5_tree.png");
-            imagePath.add("/images/appletree/6_tree.png");
+            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/start/start.png");
         }
         // Add img plantStages
         for (int i = 0; i < imagePath.size(); i++){

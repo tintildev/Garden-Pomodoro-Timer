@@ -5,6 +5,8 @@ import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class StartWindowController {
     private int progress = 0;
     private MainController mainController;
     private AppModel model;
+    private boolean switchCheck = true;
 
 
 
@@ -26,6 +29,12 @@ public class StartWindowController {
         mainController = sManger;
         model = mainController.getModel();
         initialize();
+        addData();
+    }
+
+    private void addData() {
+        workTime = model.getTime() * 60;
+        remainingTime = workTime;
     }
 
     public void initialize(){
@@ -37,19 +46,20 @@ public class StartWindowController {
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
         view.getLearnTag().setText(model.getTag());
+        //Todo:: InitialTrees with Data from DB
         view.initialTrees(new ArrayList<String>());
-
-        //Switch Scene
-        view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-            mainController.switchTo("chose");
-        });
+        switchScene();
     }
-    public void updateView(){
-        System.out.println("Scene switch to Start, update view!");
-        view.getLearnTag().setText(model.getTag());
-        setWorkTime(model.getTime() * 60);
-        remainingTime = workTime;
-        view.getTimeLabel().setText(formatTime(remainingTime));
+    private void switchScene() {
+        // create EventHanlder, to check switchCheck
+        EventHandler<javafx.scene.input.MouseEvent> switchHandler = event -> {
+            if (switchCheck) {
+                mainController.switchTo("chose");
+            } else {
+                System.out.println("Scene changes not allowed!");
+            }
+        };
+        view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, switchHandler);
     }
 
     private void updateTimer() {
@@ -62,7 +72,6 @@ public class StartWindowController {
             //Change Images
             if (workTime > 0) {  // Fortschritt erhöhen
                 progress = (int) (progressTime * 100);
-
                 // calculate image stage with the progress
                 int stage = progress / 20;  // 5 images, at all 20%
                 //System.out.println("% : " + progress / 20);
@@ -96,6 +105,7 @@ public class StartWindowController {
             timeline.play();
             view.getStatus().setText("Pause ? Do not give up!");
         }
+        switchCheck = false;
     }
 
     public void pauseTimer() {
@@ -111,22 +121,26 @@ public class StartWindowController {
             view.getStatus().setText("Ready to start!");
         }
         remainingTime = workTime;  // Reset remainingTime to workTime
+        progress = 0;
         view.getTimeLabel().setText(formatTime(remainingTime)); //reset
-        view.getProgress().setProgress(0); // reset progress
+        view.getProgress().setProgress(progress); // reset progress
         view.getPlantImageView().setImage(view.getPlantStages()[0]); //reset image
+        switchCheck = true; //allaow switch scene
     }
 
     public void plusTime() {
         workTime = workTime + 60; // 1 min;
         remainingTime = workTime;
-        view.getTimeLabel().setText(formatTime(remainingTime));
+        model.setTime(remainingTime);
+        view.getTimeLabel().setText(formatTime(model.getTime()));
     }
     public void minusTime() {
         // no negativ time
         if (workTime > 60) {
             workTime = workTime - 60; // 1 min;
             remainingTime = workTime;
-            view.getTimeLabel().setText(formatTime(remainingTime));
+            model.setTime(remainingTime);
+            view.getTimeLabel().setText(formatTime(model.getTime()));
         }
     }
 
@@ -143,5 +157,13 @@ public class StartWindowController {
 
     public int getRemainingTime() {
         return remainingTime;
+    }
+
+    public void updateView(){
+        System.out.println("Scene switch to Start, update view!");
+        view.getLearnTag().setText(model.getTag());
+        setWorkTime(model.getTime() * 60);
+        remainingTime = workTime;
+        view.getTimeLabel().setText(formatTime(remainingTime));
     }
 }

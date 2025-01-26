@@ -38,12 +38,13 @@ public class ChosePlant {
 
     private FlowPane getPlantContainer(){
         FlowPane plantContainer = new FlowPane();
-        //Todo:: dynamic plants form db
         ArrayList<String> plantList = new ArrayList<>();
-        plantList.add("/images/appletree/6_tree.png");
-        plantList.add("/images/conifer/6_tree.png");
-        plantList.add("/images/fall/6_tree.png");
-        plantList.add("/images/round/6_tree.png");
+        //Todo:: dynamic plants form db
+        plantList.add("/images/start/start.png");
+        plantList.add("/images/start/start.png");
+        plantList.add("/images/start/start.png");
+        plantList.add("/images/start/start.png");
+
 
         for(String name : plantList){
             InputStream inputStream1 = getClass().getResourceAsStream(name);
@@ -60,7 +61,7 @@ public class ChosePlant {
     private FlowPane getChoseContainer (){
         //Todo:: Data from db
         FlowPane choseContainer = new FlowPane();
-        Label timeLabel = new Label("+" +timeChose);
+        Label timeLabel = new Label("+" + timeChose);
         Label tagLabel = new Label(tagChose);
         InputStream inputStream = getClass().getResourceAsStream("/images/start/start.png");
         plantImage = new Image(inputStream);
