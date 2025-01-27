@@ -25,7 +25,7 @@ public class ChosePlant {
     public ChosePlant(){
         root = new VBox();
         FlowPane plantContainer = getPlantContainer();
-        HBox fokusTimeContainer = getFocusTimeContainer();
+        FlowPane fokusTimeContainer = getFocusTimeContainer();
         HBox tagsContainer = getTagsContainer(new ArrayList<String>());
         FlowPane choseContainer = getChoseContainer();
 
@@ -77,8 +77,8 @@ public class ChosePlant {
         return choseContainer;
     }
 
-    private HBox getFocusTimeContainer (){
-        HBox timesContainer = new HBox();
+    private FlowPane getFocusTimeContainer (){
+        FlowPane timesContainer = new FlowPane();
         ArrayList<Integer> times = new ArrayList<Integer>();
         times.add(10);
         times.add(15);
@@ -96,7 +96,7 @@ public class ChosePlant {
             });
             timesContainer.getChildren().add(tempTimeLabel);
         }
-        timesContainer.setSpacing(10);
+
 
         return timesContainer;
     }
