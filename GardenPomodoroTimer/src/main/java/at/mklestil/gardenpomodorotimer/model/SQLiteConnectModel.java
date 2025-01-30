@@ -35,7 +35,30 @@ public class SQLiteConnectModel {
             stmt.execute(sql);
             //System.out.println("Tabelle 'images' erstellt (falls nicht vorhanden).");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Erstellen der Tabelle: " + e.getMessage());
+            System.out.println("Error creating the table: " + e.getMessage());
+        }
+    }
+
+    public void createTablePomodoroSessions() {
+        if (connection == null) {
+            System.out.println("Error: Keine gültige Datenbankverbindung!");
+            return;
+        }
+
+        String sql = """
+            CREATE TABLE IF NOT EXISTS pomodoro_sessions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                duration INTEGER NOT NULL,
+                plant_choice TEXT NOT NULL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            );
+            """;
+
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Table 'pomodoro_sessions' checked/created.");
+        } catch (SQLException e) {
+            System.err.println("Error creating the table: " + e.getMessage());
         }
     }
 
