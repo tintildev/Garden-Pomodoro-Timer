@@ -1,9 +1,6 @@
 package at.mklestil.gardenpomodorotimer.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SQLiteConnectModel {
 
@@ -60,6 +57,30 @@ public class SQLiteConnectModel {
         } catch (SQLException e) {
             System.err.println("Error creating the table: " + e.getMessage());
         }
+    }
+
+    //Todo:: Save and Load Sessions
+    public void saveSession(int duration, String plantChoice){
+        if (connection == null) {
+            System.out.println("Error: No valid database connection!");
+            return;
+        }
+
+        String sql = "INSERT INTO pomodoro_sessions (duration, plant_choice) VALUES (?, ?)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, duration);
+            pstmt.setString(2, plantChoice);
+            pstmt.executeUpdate();
+            System.out.println("Session saved: " + duration + " min, plant: " + plantChoice);
+        } catch (SQLException e) {
+            System.err.println("Error by save the session: " + e.getMessage());
+        }
+    }
+
+
+    public void loadSessision(){
+
     }
 
     //Set Images Path
