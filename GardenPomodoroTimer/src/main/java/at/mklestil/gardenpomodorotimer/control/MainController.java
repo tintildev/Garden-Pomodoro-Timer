@@ -15,6 +15,7 @@ public class MainController {
     private final Stage stage;
     private Scene mainScene;
     private AppModel model;
+    private SQLiteConnectModel sqLiteConnectModel;
     private int appWidth = 280;
     private int appHeight = 420;
     private Scene startScene;
@@ -25,6 +26,8 @@ public class MainController {
     public MainController(Stage stage, AppModel model) {
         this.model = model;
         this.stage = stage;
+        sqLiteConnectModel = new SQLiteConnectModel();
+        createSessionsDB();
     }
     public void initializeScenes(){
         //Start View
@@ -69,6 +72,18 @@ public class MainController {
 
         //Set Data
         sqlModel.insertImagePath("/images/start/start.png");
+    }
+
+    public void createSessionsDB(){
+        //Initial DB
+        sqLiteConnectModel.connect();
+        sqLiteConnectModel.createTablePomodoroSessions();
+    }
+
+    public void saveSession(int time, String plant){
+        sqLiteConnectModel.saveSession(time, plant);
+        //Test save, log data
+        sqLiteConnectModel.loadPomodoroSessions();
     }
 }
 

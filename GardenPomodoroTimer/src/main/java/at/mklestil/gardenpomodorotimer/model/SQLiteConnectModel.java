@@ -59,7 +59,7 @@ public class SQLiteConnectModel {
         }
     }
 
-    //Todo:: Save and Load Sessions
+    // Save Sessions
     public void saveSession(int duration, String plantChoice){
         if (connection == null) {
             System.out.println("Error: No valid database connection!");
@@ -71,6 +71,7 @@ public class SQLiteConnectModel {
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, duration);
             pstmt.setString(2, plantChoice);
+            // timestamp = SQLite automatically sets the current time in UTC format (YYYY-MM-DD HH:MM:SS)
             pstmt.executeUpdate();
             System.out.println("Session saved: " + duration + " min, plant: " + plantChoice);
         } catch (SQLException e) {
@@ -78,10 +79,29 @@ public class SQLiteConnectModel {
         }
     }
 
+    // Load Sessions
+    public void loadPomodoroSessions() {
+        String sql = "SELECT id, duration, plant_choice, timestamp FROM pomodoro_sessions";
 
-    public void loadSessision(){
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
+            System.out.println("Saved Pomodoro-Session:");
+            while (rs.next()) { // Zeilenweise durch die Ergebnisse iterieren
+                int id = rs.getInt("id");
+                int duration = rs.getInt("duration");
+                String plantChoice = rs.getString("plant_choice");
+                String timestamp = rs.getString("timestamp");
+
+                // Log-Ausgabe
+                System.out.println("ID: " + id + ", Duration: " + duration + "min, plant: " + plantChoice + ", timestamp: " + timestamp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error by load the session: " + e.getMessage());
+        }
     }
+
 
     //Set Images Path
     public void insertImagePath(String imagePath) {

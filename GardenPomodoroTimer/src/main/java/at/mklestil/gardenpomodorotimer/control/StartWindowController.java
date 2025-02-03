@@ -21,6 +21,7 @@ public class StartWindowController {
     private MainController mainController;
     private AppModel model;
     private boolean switchCheck = true;
+    private String sessionObject = "test";
 
 
 
@@ -35,6 +36,7 @@ public class StartWindowController {
     private void addData() {
         workTime = model.getTime() * 60;
         remainingTime = workTime;
+        sessionObject = model.getSelectedPlant();
     }
 
     public void initialize(){
@@ -87,6 +89,8 @@ public class StartWindowController {
         else if (remainingTime == 0){
             // Finish Timer
             view.getStatus().setText("Great Job!");
+            mainController.saveSession(workTime / 60, sessionObject); // save data in db
+            timeline.stop(); // stop timeline
         }else {
             // Timer-Ende
             pauseTimer();
