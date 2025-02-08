@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class StartWindow {
     private Button plus = new Button("+");
     private Button minus = new Button("-");
     private ProgressBar progress;
-    private Label learnTag = new Label("");
+    private Label tagLabel = new Label("");
     private Button startButton = new Button("Start");
     private Button breakButton = new Button("Break");
     private Button resetButton = new Button("Rest");
@@ -41,7 +40,7 @@ public class StartWindow {
         hbox.getChildren().addAll(plus, progress, minus);
         HBox buttonBox = new HBox(5);
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
-        vBox.getChildren().addAll(plantImageView, learnTag, hbox, buttonBox);
+        vBox.getChildren().addAll(plantImageView, tagLabel, hbox, buttonBox);
 
         //Status and Time
         status = new Label("Ready to start!");
@@ -67,7 +66,7 @@ public class StartWindow {
         );
 
         // CSS Classes
-        learnTag.getStyleClass().add("tagLabel");
+        tagLabel.getStyleClass().add("tagLabel");
         status.getStyleClass().add("statusLabel");
         timeLabel.getStyleClass().add("timeLabel");
 
@@ -172,11 +171,11 @@ public class StartWindow {
         this.plantImageView = plantImageView;
     }
 
-    public Label getLearnTag() {
-        return learnTag;
+    public Label getTagLabel() {
+        return tagLabel;
     }
 
-    public void setLearnTag(Label learnTag) {
-        this.learnTag = learnTag;
+    public void setTagLabel(Label tagLabel) {
+        this.tagLabel = tagLabel;
     }
 }

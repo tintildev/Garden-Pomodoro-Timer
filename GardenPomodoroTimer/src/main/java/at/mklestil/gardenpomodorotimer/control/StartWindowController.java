@@ -1,15 +1,16 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
-import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.ChoiceDialog;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class StartWindowController {
     private StartWindow view;
@@ -44,10 +45,11 @@ public class StartWindowController {
         view.getStartButton().setOnAction(e -> startTimer());
         view.getBreakButton().setOnAction(e -> pauseTimer());
         view.getResetButton().setOnAction(e -> resetTimer());
+        view.getTagLabel().setOnMouseClicked(event -> showTagSelectionDialog());
 
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
-        view.getLearnTag().setText(model.getTag());
+        view.getTagLabel().setText(model.getTag());
         //Todo:: InitialTrees with Data from DB
         view.initialTrees(new ArrayList<String>());
         switchScene();
@@ -138,6 +140,34 @@ public class StartWindowController {
         view.getBreakButton().setDisable(true);
     }
 
+    private void showTagSelectionDialog() {
+        List<String> tags = mainController.loadTagsFromDB();
+        if (tags.isEmpty()) {
+            System.out.println("Keine Tags vorhanden.");
+            ChoiceDialog<String> dialog = new ChoiceDialog<>(model.getTag());
+            dialog.setTitle("Tag auswählen");
+            dialog.setHeaderText("Wähle einen Tag für deine Session:");
+            dialog.setContentText("Tag:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(selectedTag -> {
+                model.setTag(selectedTag); // save at model
+                view.getTagLabel().setText(selectedTag); // UI
+            });
+        }else{
+            ChoiceDialog<String> dialog = new ChoiceDialog<>(tags.get(0), tags);
+            dialog.setTitle("Tag auswählen");
+            dialog.setHeaderText("Wähle einen Tag für deine Session:");
+            dialog.setContentText("Tag:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(selectedTag -> {
+                model.setTag(selectedTag); // save at model
+                view.getTagLabel().setText(selectedTag); // UI
+            });
+        }
+    }
+
     public void plusTime() {
         workTime = workTime + 60; // 1 min;
         remainingTime = workTime;
@@ -171,7 +201,7 @@ public class StartWindowController {
 
     public void updateView(){
         System.out.println("Scene switch to Start, update view!");
-        view.getLearnTag().setText(model.getTag());
+        view.getTagLabel().setText(model.getTag());
         setWorkTime(model.getTime() * 60);
         remainingTime = workTime;
         view.getTimeLabel().setText(formatTime(remainingTime));

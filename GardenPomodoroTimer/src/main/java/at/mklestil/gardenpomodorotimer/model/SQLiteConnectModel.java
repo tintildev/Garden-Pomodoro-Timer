@@ -1,6 +1,8 @@
 package at.mklestil.gardenpomodorotimer.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQLiteConnectModel {
 
@@ -87,9 +89,37 @@ public class SQLiteConnectModel {
         }
     }
 
-    // Create Table Tags
-
     //Todo: Tags
+
+    // Create Table Tags
+    public void createTagsTable() {
+        String sql = """
+        CREATE TABLE IF NOT EXISTS tags (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE NOT NULL
+        );
+        """;
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Error creating the table: " + e.getMessage());
+        }
+    }
+
+    public List<String> loadTagsFromDB() {
+        List<String> tags = new ArrayList<>();
+        String sql = "SELECT name FROM tags";
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                tags.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error by load the tags: " + e.getMessage());
+        }
+        return tags;
+    }
 
 
     //Create Table Images

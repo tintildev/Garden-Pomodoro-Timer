@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainController {
@@ -27,7 +28,8 @@ public class MainController {
         this.model = model;
         this.stage = stage;
         sqLiteConnectModel = new SQLiteConnectModel();
-        createSessionsDB();
+        //create Tables
+        startDBs();
     }
     public void initializeScenes(){
         //Start View
@@ -64,18 +66,13 @@ public class MainController {
         return model;
     }
 
-    public void startDB(){
-        //Todo:: weiter mit Datenbank
-        //Initial DB
-        SQLiteConnectModel sqlModel = new SQLiteConnectModel();
-        sqlModel.connect();
-        sqlModel.createTable();
+    private void startDBs(){
+        createSessionsDB();
+        createTagDB();
 
-        //Set Data
-        sqlModel.insertImagePath("/images/start/start.png");
     }
 
-    public void createSessionsDB(){
+    private void createSessionsDB(){
         //Initial DB
         sqLiteConnectModel.connect();
         sqLiteConnectModel.createTablePomodoroSessions();
@@ -85,6 +82,16 @@ public class MainController {
         sqLiteConnectModel.saveSession(time, plant);
         //Test save, log data
         sqLiteConnectModel.loadPomodoroSessions();
+    }
+
+    private void createTagDB(){
+        //Initial DB
+        sqLiteConnectModel.connect();
+        sqLiteConnectModel.createTagsTable();
+    }
+
+    public List<String> loadTagsFromDB(){
+        return sqLiteConnectModel.loadTagsFromDB();
     }
 }
 
