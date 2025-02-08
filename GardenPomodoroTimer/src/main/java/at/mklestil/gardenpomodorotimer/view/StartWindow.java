@@ -40,22 +40,12 @@ public class StartWindow {
         progress = new ProgressBar();
         hbox.getChildren().addAll(plus, progress, minus);
         HBox buttonBox = new HBox(5);
-
-        // CSS Classes
-        learnTag.getStyleClass().add("tagLabel");
-
-
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
         vBox.getChildren().addAll(plantImageView, learnTag, hbox, buttonBox);
 
-
         //Status and Time
         status = new Label("Ready to start!");
-        status.setFont(Font.font("Roboto", 20));
-        status.setTextFill(Color.WHITE);
         timeLabel = new Label("25:00");
-        timeLabel.setFont(new Font("Roboto", 40));
-        timeLabel.setTextFill(Color.WHITE);
 
         //Add root
         root.setTop(status);
@@ -75,6 +65,11 @@ public class StartWindow {
                 null,  // Ecken (CornerRadii)
                 null   // Rand (Insets)
         );
+
+        // CSS Classes
+        learnTag.getStyleClass().add("tagLabel");
+        status.getStyleClass().add("statusLabel");
+        timeLabel.getStyleClass().add("timeLabel");
 
         // set Background
         root.setBackground(new Background(backgroundFill));

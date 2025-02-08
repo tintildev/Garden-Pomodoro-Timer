@@ -1,4 +1,4 @@
-/* Hintergrundfarbe setzen */
+/* background */
 .root {
     -fx-background-color: #55C57A;
 }
@@ -16,12 +16,25 @@
     -fx-background-color: #44a065;
 }
 
-/* Fortschrittsbalken */
+/* Progress */
 .progress-bar {
     -fx-accent: #6aff00;
 }
 
+/* Label */
 .tagLabel{
     -fx-background-color: white;
     -fx-padding: 5px;
+}
+
+.statusLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto";
+}
+
+.timeLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 40px;
+    -fx-font-family: "Roboto";
 }
