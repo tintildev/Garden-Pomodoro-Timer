@@ -1,0 +1,27 @@
+/* Hintergrundfarbe setzen */
+.root {
+    -fx-background-color: #55C57A;
+}
+
+/* Button Styling */
+.button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #44a065;
+}
+
+/* Fortschrittsbalken */
+.progress-bar {
+    -fx-accent: #6aff00;
+}
+
+.tagLabel{
+    -fx-background-color: white;
+    -fx-padding: 5px;
+}

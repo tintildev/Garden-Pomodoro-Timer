@@ -40,6 +40,11 @@ public class StartWindow {
         progress = new ProgressBar();
         hbox.getChildren().addAll(plus, progress, minus);
         HBox buttonBox = new HBox(5);
+
+        // CSS Classes
+        learnTag.getStyleClass().add("tagLabel");
+
+
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
         vBox.getChildren().addAll(plantImageView, learnTag, hbox, buttonBox);
 
@@ -74,6 +79,8 @@ public class StartWindow {
         // set Background
         root.setBackground(new Background(backgroundFill));
 
+        // disable
+        breakButton.setDisable(true);
     }
 
     public void startTree(){

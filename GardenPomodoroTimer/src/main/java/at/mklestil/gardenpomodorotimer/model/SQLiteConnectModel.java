@@ -20,22 +20,7 @@ public class SQLiteConnectModel {
         }
     }
 
-    //Create Table
-    public void createTable() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS images (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    path TEXT NOT NULL
-                );
-                """;
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute(sql);
-            //System.out.println("Tabelle 'images' erstellt (falls nicht vorhanden).");
-        } catch (SQLException e) {
-            System.out.println("Error creating the table: " + e.getMessage());
-        }
-    }
-
+    // creat Sessions
     public void createTablePomodoroSessions() {
         if (connection == null) {
             System.out.println("Error: Keine gültige Datenbankverbindung!");
@@ -102,6 +87,26 @@ public class SQLiteConnectModel {
         }
     }
 
+    // Create Table Tags
+
+    //Todo: Tags
+
+
+    //Create Table Images
+    public void createTable() {
+        String sql = """
+                CREATE TABLE IF NOT EXISTS images (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    path TEXT NOT NULL
+                );
+                """;
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute(sql);
+            //System.out.println("Tabelle 'images' erstellt (falls nicht vorhanden).");
+        } catch (SQLException e) {
+            System.out.println("Error creating the table: " + e.getMessage());
+        }
+    }
 
     //Set Images Path
     public void insertImagePath(String imagePath) {

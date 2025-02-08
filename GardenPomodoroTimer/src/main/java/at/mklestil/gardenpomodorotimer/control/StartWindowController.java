@@ -104,6 +104,8 @@ public class StartWindowController {
             timeline.play();
             view.getStatus().setText("Do not give up!");
             view.getPlantImageView().setImage(view.getPlantStages()[0]);
+            view.getStartButton().setDisable(true);
+            view.getBreakButton().setDisable(false);
         }else {
             //Pause
             timeline.play();
@@ -117,6 +119,8 @@ public class StartWindowController {
             timeline.pause();
             view.getStatus().setText("Wait");
         }
+        view.getBreakButton().setDisable(true);
+        view.getStartButton().setDisable(false);
     }
 
     public void resetTimer() {
@@ -130,6 +134,8 @@ public class StartWindowController {
         view.getProgress().setProgress(progress); // reset progress
         view.getPlantImageView().setImage(view.getPlantStages()[0]); //reset image
         switchCheck = true; //allaow switch scene
+        view.getStartButton().setDisable(false);
+        view.getBreakButton().setDisable(true);
     }
 
     public void plusTime() {

@@ -34,6 +34,7 @@ public class MainController {
         StartWindow view = new StartWindow();
         startController = new StartWindowController(view, this);
         startScene = new Scene(view.getRoot(), appWidth, appHeight);
+        startScene.getStylesheets().add(getClass().getResource("/styles/startWindowStyle.css").toExternalForm());
 
         //ChosePlant
         ChosePlant chosePlantView = new ChosePlant();
