@@ -21,7 +21,8 @@ Open the App.java und run the start class.
 - Databases and API integration  
 - SQLITE
 - JDBC 
-- Grafik Design 
+- Grafik Design
+- work with multilingualism
 
 ## 🌱 Who is this Repository for?  
 This repository is for anyone who:  
