@@ -42,6 +42,8 @@ public class MainController {
         ChosePlant chosePlantView = new ChosePlant();
         chosePlantController = new ChosePlantController(chosePlantView, this);
         choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
+        choseScene.getStylesheets().add(getClass().getResource("/styles/chosePlant.css").toExternalForm());
+
     }
 
     public void startApp(){
