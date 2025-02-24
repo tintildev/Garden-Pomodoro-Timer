@@ -63,12 +63,17 @@ public class ChosePlant {
         FlowPane choseContainer = new FlowPane();
         Label timeLabel = new Label("+" + timeChose);
         Label tagLabel = new Label(tagChose);
+        timeLabel.getStyleClass().add("label");
+        tagLabel.getStyleClass().add("label");
         InputStream inputStream = getClass().getResourceAsStream("/images/start/start.png");
         plantImage = new Image(inputStream);
         ImageView imageView = new ImageView(plantImage);
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
+        imageView.getStyleClass().add("image-view");
         startBtn = new Button("start");
+        startBtn.getStyleClass().add("start-button");
+        choseContainer.getStyleClass().add("root");
         choseContainer.getChildren().add(timeLabel);
         choseContainer.getChildren().add(imageView);
         choseContainer.getChildren().add(tagLabel);
@@ -90,13 +95,14 @@ public class ChosePlant {
         times.add(120);
         for(Integer number : times){
             Button tempTimeLabel = new Button("" + number);
+            tempTimeLabel.getStyleClass().add("button");
             tempTimeLabel.setMinSize(40, 30);
             tempTimeLabel.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
                 timeChose = number;
             });
             timesContainer.getChildren().add(tempTimeLabel);
         }
-
+        timesContainer.getStyleClass().add("container");
 
         return timesContainer;
     }
@@ -112,6 +118,7 @@ public class ChosePlant {
                 tagsContainer.getChildren().add(temp);
             }
         }
+        tagsContainer.getStyleClass().add("container");
         return tagsContainer;
     }
 
