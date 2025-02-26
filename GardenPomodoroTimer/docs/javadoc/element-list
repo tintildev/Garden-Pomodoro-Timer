@@ -1,0 +1,6 @@
+module:at.mklestil.pomodorotimer
+at.mklestil.gardenpomodorotimer
+at.mklestil.gardenpomodorotimer.control
+at.mklestil.gardenpomodorotimer.model
+at.mklestil.gardenpomodorotimer.service
+at.mklestil.gardenpomodorotimer.view

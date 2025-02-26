@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.control;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -14,7 +15,8 @@ class StartControllerTest {
 
     private StartWindowController controller;
     private StartWindow view;  // use Mock or Dummy-View
-    private SceneManger sceneManger;
+    private MainController sceneManger;
+    private AppModel model;
 
     @BeforeAll
     static void initJfxRuntime() {
@@ -25,7 +27,8 @@ class StartControllerTest {
     @BeforeEach
     void setUp() {
         view = new StartWindow();
-        sceneManger = new SceneManger(new Stage());
+        model = new AppModel();
+        sceneManger = new MainController(new Stage(), model);
         controller = new StartWindowController(view, sceneManger);
     }
 
