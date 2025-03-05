@@ -3,6 +3,7 @@ package at.mklestil.gardenpomodorotimer.control;
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
+import at.mklestil.gardenpomodorotimer.view.ErrorHandler;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -60,6 +61,7 @@ public class MainController {
             stage.setScene(choseScene);
         }else {
             System.out.println("Error: Scene " + name +" not found");
+            ErrorHandler.showError("Error: Scene " + name +" not found");
         }
 
     }
