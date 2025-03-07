@@ -57,7 +57,7 @@ public class MainController {
             stage.setScene(startScene);
             startController.updateView();
         }
-        if(name.equals("chose")){
+        else if(name.equals("chose")){
             stage.setScene(choseScene);
         }else {
             System.out.println("Error: Scene " + name +" not found");
