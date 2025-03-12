@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is to manage the connection to the sqlite db.
+ */
 public class SQLiteConnectModel {
 
     private Connection connection;
@@ -22,10 +25,12 @@ public class SQLiteConnectModel {
         }
     }
 
-    // creat Sessions
+    /**
+     * Methode to create the Sessions
+     */
     public void createTablePomodoroSessions() {
         if (connection == null) {
-            System.out.println("Error: Keine gültige Datenbankverbindung!");
+            System.out.println("Error: No valid database connection!");
             return;
         }
 
@@ -46,7 +51,11 @@ public class SQLiteConnectModel {
         }
     }
 
-    // Save Sessions
+    /**
+     * Methode to save sessions in db.
+     * @param duration
+     * @param plantChoice
+     */
     public void saveSession(int duration, String plantChoice){
         if (connection == null) {
             System.out.println("Error: No valid database connection!");

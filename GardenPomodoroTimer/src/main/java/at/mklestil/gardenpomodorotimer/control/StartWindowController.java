@@ -54,6 +54,10 @@ public class StartWindowController {
         view.initialTrees(new ArrayList<String>());
         switchScene();
     }
+
+    /**
+     * Method to mangage Events to switch the scene
+     */
     private void switchScene() {
         // create EventHanlder, to check switchCheck
         EventHandler<javafx.scene.input.MouseEvent> switchHandler = event -> {
@@ -64,6 +68,10 @@ public class StartWindowController {
             }
         };
         view.getPlantImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, switchHandler);
+        view.getBtnSettings().setOnAction(event -> {
+            mainController.switchTo("settings");
+        });
+
     }
 
     private void updateTimer() {

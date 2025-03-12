@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,6 +26,7 @@ public class StartWindow {
     private Label timeLabel;
     private final Image[] plantStages = new Image[6];
     private ImageView plantImageView;
+    private Button btnSettings;
 
     public StartWindow() {
         root = new BorderPane();
@@ -43,11 +45,14 @@ public class StartWindow {
         vBox.getChildren().addAll(plantImageView, tagLabel, hbox, buttonBox);
 
         //Status and Time
-        status = new Label("Ready to start!");
+        BorderPane topPane = new BorderPane();
+        status = new Label(LanguageManager.getInstance().getBundle().getString("status"));
+        topPane.setCenter(status);
+        topPane.setRight(loadSettingsBtn());
         timeLabel = new Label("25:00");
 
         //Add root
-        root.setTop(status);
+        root.setTop(topPane);
         root.setCenter(vBox);
         root.setBottom(timeLabel);
 
@@ -90,6 +95,27 @@ public class StartWindow {
         }else{
             System.out.println("Image file not found.");
         }
+    }
+
+    public Button loadSettingsBtn(){
+        btnSettings = new Button("");
+        InputStream inputStream = getClass().getResourceAsStream("/images/start/settings.png");
+        if(inputStream != null){
+            //Check Image is correct
+            Image image = new Image(inputStream);
+            if(!image.isError()){
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(24);
+                imageView.setFitWidth(24);
+                btnSettings.setGraphic(imageView);
+                btnSettings.setStyle("-fx-background-color: transparent;");
+            }else {
+                System.out.println("Error loading image: " + "/images/start/start.png");
+            }
+        }else{
+            System.out.println("Image file not found.");
+        }
+        return btnSettings;
     }
 
     public void initialTrees(ArrayList<String> listImagePath){
@@ -177,5 +203,9 @@ public class StartWindow {
 
     public void setTagLabel(Label tagLabel) {
         this.tagLabel = tagLabel;
+    }
+
+    public Button getBtnSettings() {
+        return btnSettings;
     }
 }

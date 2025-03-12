@@ -1,5 +1,8 @@
 package at.mklestil.gardenpomodorotimer.model;
 
+/**
+ * AppModel local data
+ */
 public class AppModel {
     private String selectedPlant = "start";
     private int time = 25;

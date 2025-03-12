@@ -2,8 +2,10 @@ package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
+import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import at.mklestil.gardenpomodorotimer.view.ErrorHandler;
+import at.mklestil.gardenpomodorotimer.view.SettingsView;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,16 +24,26 @@ public class MainController {
     private int appHeight = 420;
     private Scene startScene;
     private Scene choseScene;
+    private Scene settingsScene;
     private StartWindowController startController;
     private ChosePlantController chosePlantController;
+    private SettingsController settingsController;
 
     public MainController(Stage stage, AppModel model) {
         this.model = model;
         this.stage = stage;
         sqLiteConnectModel = new SQLiteConnectModel();
+
+        // Set language before views are loaded
+        LanguageManager.getInstance();
+
         //create Tables
         startDBs();
     }
+
+    /**
+     * Initialize the view and controllers.
+     */
     public void initializeScenes(){
         //Start View
         StartWindow view = new StartWindow();
@@ -45,6 +57,11 @@ public class MainController {
         choseScene = new Scene(chosePlantView.getRoot(), appWidth, appHeight);
         choseScene.getStylesheets().add(getClass().getResource("/styles/chosePlant.css").toExternalForm());
 
+        // Settings
+        SettingsView settingsView = new SettingsView();
+        settingsController = new SettingsController(settingsView);
+        settingsScene = new Scene(settingsView.getRoot(), appWidth, appHeight);
+
     }
 
     public void startApp(){
@@ -57,9 +74,12 @@ public class MainController {
             stage.setScene(startScene);
             startController.updateView();
         }
-        else if(name.equals("chose")){
+        else if(name.equals("chose")) {
             stage.setScene(choseScene);
-        }else {
+        } else if (name.equals("settings")) {
+            stage.setScene(settingsScene);
+
+    }else {
             System.out.println("Error: Scene " + name +" not found");
             ErrorHandler.showError("Error: Scene " + name +" not found");
         }
@@ -97,5 +117,14 @@ public class MainController {
     public List<String> loadTagsFromDB(){
         return sqLiteConnectModel.loadTagsFromDB();
     }
+
+    public void changeLanugage(){
+        LanguageManager.getInstance().addLanguageChangeListener(() -> {
+            System.out.println("Language has been changed! UI needs to be updated now.");
+            initializeScenes(); // reload UI Elements
+        });
+    }
 }
+
+
 
