@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        AppModel model = new AppModel();
+        AppModel model = AppModel.getInstance();
 
         //Add Main Controller to controll data and scenes
         MainController mainController = new MainController(stage, model);

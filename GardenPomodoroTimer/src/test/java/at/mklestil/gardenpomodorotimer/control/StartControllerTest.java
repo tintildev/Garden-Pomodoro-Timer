@@ -27,7 +27,7 @@ class StartControllerTest {
     @BeforeEach
     void setUp() {
         view = new StartWindow();
-        model = new AppModel();
+        model = AppModel.getInstance();
         sceneManger = new MainController(new Stage(), model);
         controller = new StartWindowController(view, sceneManger);
     }

@@ -1,5 +1,7 @@
 package at.mklestil.gardenpomodorotimer.service;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
@@ -10,14 +12,16 @@ import java.util.*;
 public class LanguageManager {
     private static LanguageManager instance;
     private ResourceBundle bundle;
+    /*
+    * Runnable is a list of functions that are automatically executed when the language is changed.
+     */
     private final List<Runnable> listeners = new ArrayList<>();
-    private static Locale currentLocale = new Locale.Builder()
-            .setLanguage("de")
-            .build();
+    private Locale currentLocale;
+    private AppModel model = AppModel.getInstance();
 
     private LanguageManager() {
         // JDK 19 use Locale.Builder
-        loadLanguage(new ConfigManager().getLanguage());
+        setLocale(model.getCurrentLanguage());
     }
 
     public static LanguageManager getInstance() {
@@ -27,27 +31,23 @@ public class LanguageManager {
         return instance;
     }
 
-    private void loadLanguage(HashMap<String, String> language) {
-        setLocale(language.get("language"));
+    private void loadLanguage() {
         this.bundle = ResourceBundle.getBundle("lang.messages", currentLocale);
         System.out.println("Loadet language: " + bundle.getString("language"));
         notifyListeners();
-        /**
-         * Search properties
-         *   System.out.println("Current Locale: " + currentLocale);
-         *         InputStream stream = getClass().getResourceAsStream("/lang/messages_de.properties");
-         *         System.out.println(stream);
-         *         URL resourceUrl = getClass().getResource("/lang/messages.properties");
-         *         System.out.println("Resource URL: " + resourceUrl);
-         */
 
     }
 
-    public static void setLocale(String languageCode) {
+    public void setLocale(String languageCode) {
+        model.setCurrentLanguage(languageCode);
         currentLocale = new Locale.Builder()
                 .setLanguage(languageCode)
                 .build();
+        System.out.println("setLocale - Language: " + languageCode);
+        //set locale, model and load new language in ui (notifyListeners)
         Locale.setDefault(currentLocale);
+        model.setCurrentLanguage(languageCode);
+        loadLanguage();
 
     }
 
@@ -61,18 +61,8 @@ public class LanguageManager {
         listeners.add(listener);
     }
 
-    public static Locale getLocale() {
-            return currentLocale;
-    }
-
     public ResourceBundle getBundle() {
         return bundle;
-    }
-
-    public void changeLanguage(String newLanguageCode) {
-        ConfigManager configManager = new ConfigManager();
-        configManager.setLanguage(newLanguageCode); // Sprache in der Config speichern
-        loadLanguage(configManager.getLanguage()); // Neue Sprache laden
     }
 
 

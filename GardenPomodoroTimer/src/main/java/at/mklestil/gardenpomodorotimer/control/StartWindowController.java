@@ -1,6 +1,7 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
+import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

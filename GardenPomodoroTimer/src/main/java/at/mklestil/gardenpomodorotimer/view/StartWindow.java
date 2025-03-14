@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class StartWindow {
     private BorderPane root;
@@ -30,7 +31,10 @@ public class StartWindow {
 
     public StartWindow() {
         root = new BorderPane();
+        initialize();
+    }
 
+    private void initialize() {
         //Timer
         VBox vBox = new VBox(5);
         HBox hbox = new HBox(5);
@@ -50,6 +54,10 @@ public class StartWindow {
         topPane.setCenter(status);
         topPane.setRight(loadSettingsBtn());
         timeLabel = new Label("25:00");
+
+        //updateTexts
+        updateTexts();
+        LanguageManager.getInstance().addLanguageChangeListener(this::updateTexts);
 
         //Add root
         root.setTop(topPane);
@@ -80,6 +88,14 @@ public class StartWindow {
 
         // disable
         breakButton.setDisable(true);
+
+        //add Listener
+        LanguageManager.getInstance().addLanguageChangeListener(this::updateTexts);
+    }
+
+    public void updateTexts(){
+        ResourceBundle bundle = LanguageManager.getInstance().getBundle();
+        status.setText(bundle.getString("status"));
     }
 
     public void startTree(){

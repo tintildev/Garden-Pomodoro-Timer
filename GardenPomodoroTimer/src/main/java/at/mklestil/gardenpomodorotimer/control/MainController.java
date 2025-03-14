@@ -10,9 +10,7 @@ import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainController {
 
@@ -59,7 +57,7 @@ public class MainController {
 
         // Settings
         SettingsView settingsView = new SettingsView();
-        settingsController = new SettingsController(settingsView);
+        settingsController = new SettingsController(settingsView, this);
         settingsScene = new Scene(settingsView.getRoot(), appWidth, appHeight);
 
     }
