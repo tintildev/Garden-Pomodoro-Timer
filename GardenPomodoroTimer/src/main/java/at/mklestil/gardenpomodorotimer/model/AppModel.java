@@ -1,7 +1,5 @@
 package at.mklestil.gardenpomodorotimer.model;
 
-import at.mklestil.gardenpomodorotimer.service.LanguageManager;
-
 /**
  * AppModel local data
  */
@@ -11,6 +9,7 @@ public class AppModel {
     private String tag = "lernen";
     private String currentLanguage = "de";
     private static AppModel instance;
+    private String backgroundColor = "#55C57A";
 
     private AppModel() {
 
@@ -54,5 +53,11 @@ public class AppModel {
         this.currentLanguage = language;
     }
 
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
 
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
 }

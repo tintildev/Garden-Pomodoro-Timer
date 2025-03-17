@@ -1,18 +1,23 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class SettingsView {
 
     private VBox root = new VBox();
     private ComboBox<String> languageBox;
     private Button backBtn = new Button("Start");
+
+    private ColorPicker colorPicker = new ColorPicker(Color.web(AppModel.getInstance().getBackgroundColor()));
 
     public SettingsView(){
         FlowPane flowPane = new FlowPane();
@@ -22,7 +27,8 @@ public class SettingsView {
 
         Label infoLabel = new Label("Chose Language:");
         flowPane.getChildren().addAll(infoLabel, languageBox);
-        root.getChildren().addAll(flowPane, backBtn);
+        root.getChildren().addAll(flowPane, colorPicker, backBtn);
+
 
 
     }

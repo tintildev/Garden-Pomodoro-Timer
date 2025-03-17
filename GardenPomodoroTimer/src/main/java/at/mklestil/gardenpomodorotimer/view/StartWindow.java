@@ -21,9 +21,9 @@ public class StartWindow {
     private Button minus = new Button("-");
     private ProgressBar progress;
     private Label tagLabel = new Label("");
-    private Button startButton = new Button("Start");
-    private Button breakButton = new Button("Break");
-    private Button resetButton = new Button("Rest");
+    private Button startButton;
+    private Button breakButton;
+    private Button resetButton;
     private Label timeLabel;
     private final Image[] plantStages = new Image[6];
     private ImageView plantImageView;
@@ -35,6 +35,12 @@ public class StartWindow {
     }
 
     private void initialize() {
+        //Text
+        status = new Label(LanguageManager.getInstance().getBundle().getString("status"));
+        startButton = new Button(LanguageManager.getInstance().getBundle().getString("startButton"));
+        breakButton = new Button(LanguageManager.getInstance().getBundle().getString("breakButton"));
+        resetButton = new Button(LanguageManager.getInstance().getBundle().getString("resetButton"));
+
         //Timer
         VBox vBox = new VBox(5);
         HBox hbox = new HBox(5);
@@ -50,7 +56,6 @@ public class StartWindow {
 
         //Status and Time
         BorderPane topPane = new BorderPane();
-        status = new Label(LanguageManager.getInstance().getBundle().getString("status"));
         topPane.setCenter(status);
         topPane.setRight(loadSettingsBtn());
         timeLabel = new Label("25:00");
@@ -96,6 +101,9 @@ public class StartWindow {
     public void updateTexts(){
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
         status.setText(bundle.getString("status"));
+        startButton.setText(bundle.getString("startButton"));
+        breakButton.setText(bundle.getString("breakButton"));
+        resetButton.setText(bundle.getString("resetButton"));
     }
 
     public void startTree(){
