@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.control;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.SettingsView;
 
@@ -11,8 +12,15 @@ public class SettingsController {
         this.mainController = mainController;
 
         changeLanguage();
+        changeColor();
         changeScene();
 
+    }
+
+    private void changeColor() {
+        view.getColorPicker().setOnAction(event -> {
+            AppModel.getInstance().setBackgroundColor(view.getColorPicker().getValue().toString());
+        });
     }
 
     private void changeScene() {

@@ -44,6 +44,10 @@ public class SettingsView {
     public Button getBackBtn() {
         return backBtn;
     }
+
+    public ColorPicker getColorPicker() {
+        return colorPicker;
+    }
 }
 
 

@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -78,7 +79,7 @@ public class StartWindow {
 
         // create Background
         BackgroundFill backgroundFill = new BackgroundFill(
-                Color.web("#55C57A"),  // color
+                Color.web(AppModel.getInstance().getBackgroundColor()),  // color
                 null,  // Ecken (CornerRadii)
                 null   // Rand (Insets)
         );
@@ -104,6 +105,14 @@ public class StartWindow {
         startButton.setText(bundle.getString("startButton"));
         breakButton.setText(bundle.getString("breakButton"));
         resetButton.setText(bundle.getString("resetButton"));
+    }
+
+    public void updateColor(){
+        BackgroundFill backgroundFill = new BackgroundFill(
+                Color.web(AppModel.getInstance().getBackgroundColor()),  // color
+                null,  // Ecken (CornerRadii)
+                null);   // Rand (Insets)
+        root.setBackground(new Background(backgroundFill));
     }
 
     public void startTree(){

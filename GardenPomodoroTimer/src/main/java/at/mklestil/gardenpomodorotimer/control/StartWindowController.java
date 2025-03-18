@@ -214,5 +214,6 @@ public class StartWindowController {
         setWorkTime(model.getTime() * 60);
         remainingTime = workTime;
         view.getTimeLabel().setText(formatTime(remainingTime));
+        view.updateColor();
     }
 }
