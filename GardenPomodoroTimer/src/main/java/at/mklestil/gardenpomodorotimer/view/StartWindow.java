@@ -29,6 +29,7 @@ public class StartWindow {
     private final Image[] plantStages = new Image[6];
     private ImageView plantImageView;
     private Button btnSettings;
+    private Button btnChart;
 
     public StartWindow() {
         root = new BorderPane();
@@ -57,6 +58,7 @@ public class StartWindow {
 
         //Status and Time
         BorderPane topPane = new BorderPane();
+        topPane.setLeft(loadChartBtn());
         topPane.setCenter(status);
         topPane.setRight(loadSettingsBtn());
         timeLabel = new Label("25:00");
@@ -143,12 +145,33 @@ public class StartWindow {
                 btnSettings.setGraphic(imageView);
                 btnSettings.setStyle("-fx-background-color: transparent;");
             }else {
-                System.out.println("Error loading image: " + "/images/start/start.png");
+                System.out.println("Error loading image: " + "/images/start/settings.png");
             }
         }else{
             System.out.println("Image file not found.");
         }
         return btnSettings;
+    }
+
+    public Button loadChartBtn(){
+        btnChart = new Button("");
+        InputStream inputStream = getClass().getResourceAsStream("/images/start/chart.png");
+        if(inputStream != null){
+            //Check Image is correct
+            Image image = new Image(inputStream);
+            if(!image.isError()){
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(24);
+                imageView.setFitWidth(24);
+                btnChart.setGraphic(imageView);
+                btnChart.setStyle("-fx-background-color: transparent;");
+            }else {
+                System.out.println("Error loading image: " + "/images/start/chart.png");
+            }
+        }else{
+            System.out.println("Image file not found.");
+        }
+        return btnChart;
     }
 
     public void initialTrees(ArrayList<String> listImagePath){
