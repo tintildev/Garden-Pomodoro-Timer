@@ -3,11 +3,9 @@ package at.mklestil.gardenpomodorotimer.control;
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
-import at.mklestil.gardenpomodorotimer.view.ChosePlant;
-import at.mklestil.gardenpomodorotimer.view.ErrorHandler;
-import at.mklestil.gardenpomodorotimer.view.SettingsView;
-import at.mklestil.gardenpomodorotimer.view.StartWindow;
+import at.mklestil.gardenpomodorotimer.view.*;
 import javafx.scene.Scene;
+import javafx.scene.chart.Chart;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -23,6 +21,7 @@ public class MainController {
     private Scene startScene;
     private Scene choseScene;
     private Scene settingsScene;
+    private Scene chartScene;
     private StartWindowController startController;
     private ChosePlantController chosePlantController;
     private SettingsController settingsController;
@@ -42,7 +41,7 @@ public class MainController {
     /**
      * Initialize the view and controllers.
      */
-    public void initializeScenes(){
+    public void initializeScenes() {
         //Start View
         StartWindow view = new StartWindow();
         startController = new StartWindowController(view, this);
@@ -60,26 +59,31 @@ public class MainController {
         settingsController = new SettingsController(settingsView, this);
         settingsScene = new Scene(settingsView.getRoot(), appWidth, appHeight);
 
+        //Chart
+        ChartView chartView = new ChartView();
+        ChartController chartController = new ChartController(this, chartView);
+        chartScene = new Scene(chartView.getRoot(), appWidth, appHeight);
+
     }
 
-    public void startApp(){
+    public void startApp() {
         switchTo("start");
     }
 
     public void switchTo(String name) {
         //show scene
-        if(name.equals("start")){
+        if (name.equals("start")) {
             stage.setScene(startScene);
             startController.updateView();
-        }
-        else if(name.equals("chose")) {
+        } else if (name.equals("chose")) {
             stage.setScene(choseScene);
         } else if (name.equals("settings")) {
             stage.setScene(settingsScene);
-
-    }else {
-            System.out.println("Error: Scene " + name +" not found");
-            ErrorHandler.showError("Error: Scene " + name +" not found");
+        } else if (name.equals("chart")) {
+            stage.setScene(chartScene);
+        } else {
+            System.out.println("Error: Scene " + name + " not found");
+            ErrorHandler.showError("Error: Scene " + name + " not found");
         }
 
     }
@@ -88,35 +92,35 @@ public class MainController {
         return model;
     }
 
-    private void startDBs(){
+    private void startDBs() {
         createSessionsDB();
         createTagDB();
 
     }
 
-    private void createSessionsDB(){
+    private void createSessionsDB() {
         //Initial DB
         sqLiteConnectModel.connect();
         sqLiteConnectModel.createTablePomodoroSessions();
     }
 
-    public void saveSession(int time, String plant){
+    public void saveSession(int time, String plant) {
         sqLiteConnectModel.saveSession(time, plant);
         //Test save, log data
         sqLiteConnectModel.loadPomodoroSessions();
     }
 
-    private void createTagDB(){
+    private void createTagDB() {
         //Initial DB
         sqLiteConnectModel.connect();
         sqLiteConnectModel.createTagsTable();
     }
 
-    public List<String> loadTagsFromDB(){
+    public List<String> loadTagsFromDB() {
         return sqLiteConnectModel.loadTagsFromDB();
     }
 
-    public void changeLanugage(){
+    public void changeLanugage() {
         LanguageManager.getInstance().addLanguageChangeListener(() -> {
             System.out.println("Language has been changed! UI needs to be updated now.");
             initializeScenes(); // reload UI Elements

@@ -264,4 +264,8 @@ public class StartWindow {
     public Button getBtnSettings() {
         return btnSettings;
     }
+
+    public Button getBtnChart() {
+        return btnChart;
+    }
 }

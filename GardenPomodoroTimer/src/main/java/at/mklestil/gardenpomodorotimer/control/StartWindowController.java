@@ -72,6 +72,9 @@ public class StartWindowController {
         view.getBtnSettings().setOnAction(event -> {
             mainController.switchTo("settings");
         });
+        view.getBtnChart().setOnAction(event -> {
+            mainController.switchTo("chart");
+        });
 
     }
 
