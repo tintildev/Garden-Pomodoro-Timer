@@ -76,26 +76,32 @@ public class SQLiteConnectModel {
     }
 
     // Load Sessions
-    public void loadPomodoroSessions() {
+    public List<PomodoroSession> loadPomodoroSessions() {
+        List<PomodoroSession> sessions = new ArrayList<>();
         String sql = "SELECT id, duration, plant_choice, timestamp FROM pomodoro_sessions";
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             System.out.println("Saved Pomodoro-Session:");
-            while (rs.next()) { // Zeilenweise durch die Ergebnisse iterieren
+            while (rs.next()) { // Iterate through the results row by row
                 int id = rs.getInt("id");
                 int duration = rs.getInt("duration");
                 String plantChoice = rs.getString("plant_choice");
                 String timestamp = rs.getString("timestamp");
 
                 // Log-Ausgabe
-                System.out.println("ID: " + id + ", Duration: " + duration + "min, plant: " + plantChoice + ", timestamp: " + timestamp);
+                //System.out.println("ID: " + id + ", Duration: " + duration + "min, plant: " + plantChoice + ", timestamp: " + timestamp);
+                sessions.add(new PomodoroSession(id, duration, plantChoice, timestamp));
+
+
             }
 
         } catch (SQLException e) {
             System.out.println("Error by load the session: " + e.getMessage());
         }
+        System.out.println("Size of Sessions: " + sessions.size());
+        return sessions;
     }
 
     //Todo: Tags

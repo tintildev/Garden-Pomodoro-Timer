@@ -1,6 +1,7 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
+import at.mklestil.gardenpomodorotimer.model.PomodoroSession;
 import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.*;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.Chart;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -106,9 +108,13 @@ public class MainController {
 
     public void saveSession(int time, String plant) {
         sqLiteConnectModel.saveSession(time, plant);
-        //Test save, log data
-        sqLiteConnectModel.loadPomodoroSessions();
     }
+
+    public List<PomodoroSession> loadSessionsFromDB(){
+        return sqLiteConnectModel.loadPomodoroSessions();
+    }
+
+
 
     private void createTagDB() {
         //Initial DB
