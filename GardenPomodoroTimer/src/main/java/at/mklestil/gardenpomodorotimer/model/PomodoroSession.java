@@ -1,5 +1,8 @@
 package at.mklestil.gardenpomodorotimer.model;
 
+/**
+ * Model for PomodoroSessions, a central data model for Pomodoro sessions
+ */
 public class PomodoroSession {
     private int id;
     private int duration;

@@ -12,6 +12,10 @@ import javafx.scene.layout.VBox;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * ChosePlant View, a view to chose a plant.
+ */
+
 public class ChosePlant {
     private VBox root;
     private String chose;

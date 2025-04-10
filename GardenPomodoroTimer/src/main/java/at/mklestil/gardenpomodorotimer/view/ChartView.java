@@ -9,6 +9,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * ChartView, to view a Chart of Pomodoro Sessions.
+ */
 public class ChartView {
     private VBox root;
     private Button backBtn = new Button("Start");

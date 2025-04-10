@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+Manages view, logic, takes care of event handling, switch scenes.
+ */
 public class MainController {
 
     private final Stage stage;

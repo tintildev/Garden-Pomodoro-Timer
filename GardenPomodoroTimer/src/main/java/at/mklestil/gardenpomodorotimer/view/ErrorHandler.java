@@ -2,6 +2,9 @@ package at.mklestil.gardenpomodorotimer.view;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Central Error Handling View
+ */
 public class ErrorHandler {
     public static void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
