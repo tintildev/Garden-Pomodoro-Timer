@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
+import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +22,9 @@ public class ChosePlant {
     private String chose;
     private int timeChose = 25;
     private String tagChose = "learn";
-    private ArrayList<String> listOfPlants;
+    private ArrayList<String> plantList;
     private Image plantImage;
+    private ArrayList<ImageView> listOfImageViews = new ArrayList<>();
 
     private Button startBtn;
 
@@ -42,12 +44,13 @@ public class ChosePlant {
 
     private FlowPane getPlantContainer(){
         FlowPane plantContainer = new FlowPane();
-        ArrayList<String> plantList = new ArrayList<>();
+        plantList = new ArrayList<>();
         //Todo:: dynamic plants form db
-        plantList.add("/images/start/start.png");
-        plantList.add("/images/start/start.png");
-        plantList.add("/images/start/start.png");
-        plantList.add("/images/start/start.png");
+        plantList.add("/images/tree/6_tree.png");
+        plantList.add("/images/tree/fall.png");
+        plantList.add("/images/tree/greenLeaves.png");
+        plantList.add("/images/tree/pointedTree.png");
+        plantList.add("/images/tree/roundTree.png");
 
 
         for(String name : plantList){
@@ -56,6 +59,7 @@ public class ChosePlant {
             ImageView plantView1 = new ImageView(plantImg1);
             plantView1.setFitWidth(50);
             plantView1.setFitHeight(50);
+            listOfImageViews.add(plantView1);
             plantContainer.getChildren().add(plantView1);
         }
 
@@ -65,6 +69,7 @@ public class ChosePlant {
     private FlowPane getChoseContainer (){
         //Todo:: Data from db
         FlowPane choseContainer = new FlowPane();
+        /*
         Label timeLabel = new Label("+" + timeChose);
         Label tagLabel = new Label(tagChose);
         timeLabel.getStyleClass().add("label");
@@ -75,12 +80,15 @@ public class ChosePlant {
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
         imageView.getStyleClass().add("image-view");
-        startBtn = new Button("start");
-        startBtn.getStyleClass().add("start-button");
+
+
         choseContainer.getStyleClass().add("root");
         choseContainer.getChildren().add(timeLabel);
         choseContainer.getChildren().add(imageView);
         choseContainer.getChildren().add(tagLabel);
+        */
+        startBtn = new Button("start");
+        startBtn.getStyleClass().add("start-button");
         choseContainer.getChildren().add(startBtn);
 
         return choseContainer;
@@ -138,12 +146,8 @@ public class ChosePlant {
         return root;
     }
 
-    public void setListOfPlants(ArrayList<String> list){
-        listOfPlants = list;
-    }
-
     public ArrayList<String> getListOfPlants(){
-        return listOfPlants;
+        return plantList;
     }
 
     public Button getStartBtn(){

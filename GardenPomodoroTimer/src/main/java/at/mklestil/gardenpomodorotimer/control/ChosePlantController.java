@@ -23,7 +23,7 @@ public class ChosePlantController {
 
 
         view.getStartBtn().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-            //model.set(view.getChose());
+            model.setSelectedPlant(view.getChose());
             model.setTag(view.getTagChose());
             model.setTime(view.getTimeChose());
             System.out.println("chosen values: " + view.getChose() + " " +  view.getTagChose()+ " " + view.getTimeChose());
