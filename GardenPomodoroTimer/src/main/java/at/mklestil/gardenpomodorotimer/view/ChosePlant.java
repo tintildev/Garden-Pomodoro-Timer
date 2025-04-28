@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
 import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 
 public class ChosePlant {
     private VBox root;
-    private String chose;
+    private String chose = "/images/start/start.png";
     private int timeChose = 25;
     private String tagChose = "learn";
     private ArrayList<String> plantList;
     private Image plantImage;
-    private ArrayList<ImageView> listOfImageViews = new ArrayList<>();
+    private ArrayList<ImageViewWithPath> listOfImageViews = new ArrayList<>();
 
     private Button startBtn;
 
@@ -59,7 +60,7 @@ public class ChosePlant {
             ImageView plantView1 = new ImageView(plantImg1);
             plantView1.setFitWidth(50);
             plantView1.setFitHeight(50);
-            listOfImageViews.add(plantView1);
+            listOfImageViews.add(new ImageViewWithPath(plantView1, name));
             plantContainer.getChildren().add(plantView1);
         }
 
@@ -146,10 +147,6 @@ public class ChosePlant {
         return root;
     }
 
-    public ArrayList<String> getListOfPlants(){
-        return plantList;
-    }
-
     public Button getStartBtn(){
         return startBtn;
     }
@@ -176,5 +173,9 @@ public class ChosePlant {
 
     public void setTagChose(String tagChose) {
         this.tagChose = tagChose;
+    }
+
+    public ArrayList<ImageViewWithPath> getListOfImageViews() {
+        return listOfImageViews;
     }
 }

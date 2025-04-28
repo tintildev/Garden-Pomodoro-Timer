@@ -117,6 +117,10 @@ public class StartWindow {
         root.setBackground(new Background(backgroundFill));
     }
 
+    public void updateUI(){
+
+    }
+
     public void startTree(){
         InputStream inputStream = getClass().getResourceAsStream("/images/start/start.png");
         if(inputStream != null){

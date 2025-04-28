@@ -2,8 +2,10 @@ package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.App;
 import at.mklestil.gardenpomodorotimer.model.AppModel;
+import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -21,7 +23,30 @@ public class ChosePlantController {
         mainController = scene;
         model = mainController.getModel();
 
+        registerEventHandler();
 
+
+
+    }
+
+    private void registerEventHandler() {
+        imageViewHandler();
+
+        startButtonHandler();
+    }
+
+    private void imageViewHandler(){
+        ArrayList<ImageViewWithPath> images = view.getListOfImageViews();
+        System.out.println("Size of images: " + images.size());
+        for(ImageViewWithPath image: images){
+            image.getImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+                view.setChose(image.getPath());
+                System.out.println("Chose set: " + image.getPath());
+            });
+        }
+    }
+
+    private void startButtonHandler(){
         view.getStartBtn().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
             model.setSelectedPlant(view.getChose());
             model.setTag(view.getTagChose());
@@ -30,5 +55,6 @@ public class ChosePlantController {
             mainController.switchTo("start");
         });
     }
+
 
 }

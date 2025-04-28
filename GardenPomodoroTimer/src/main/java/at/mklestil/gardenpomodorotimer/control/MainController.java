@@ -18,7 +18,6 @@ Manages view, logic, takes care of event handling, switch scenes.
 public class MainController {
 
     private final Stage stage;
-    private Scene mainScene;
     private AppModel model;
     private SQLiteConnectModel sqLiteConnectModel;
     private int appWidth = 280;
@@ -91,6 +90,10 @@ public class MainController {
             ErrorHandler.showError("Error: Scene " + name + " not found");
         }
 
+    }
+
+    public void updateUI(){
+        //Todo: Update UI
     }
 
     public AppModel getModel() {
