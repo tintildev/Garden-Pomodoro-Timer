@@ -11,10 +11,8 @@ import java.util.ArrayList;
 
 public class ChosePlantController {
     private final ChosePlant view;
-
     private final MainController mainController;
-    private ArrayList<String> listOfPlants;
-    private Image plantImage;
+    private String chosenPlant = "";
     private AppModel model;
 
 
@@ -22,7 +20,7 @@ public class ChosePlantController {
         view = viewChosePlant;
         mainController = scene;
         model = mainController.getModel();
-
+        chosenPlant = model.getSelectedPlant();
         registerEventHandler();
 
 
@@ -31,7 +29,6 @@ public class ChosePlantController {
 
     private void registerEventHandler() {
         imageViewHandler();
-
         startButtonHandler();
     }
 
@@ -40,15 +37,16 @@ public class ChosePlantController {
         System.out.println("Size of images: " + images.size());
         for(ImageViewWithPath image: images){
             image.getImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                view.setChose(image.getPath());
-                System.out.println("Chose set: " + image.getPath());
+                chosenPlant = image.getPath();
+                view.setChose(chosenPlant);
+                System.out.println("Chose set: " + chosenPlant);
             });
         }
     }
 
     private void startButtonHandler(){
         view.getStartBtn().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-            model.setSelectedPlant(view.getChose());
+            model.setSelectedPlant(chosenPlant);
             model.setTag(view.getTagChose());
             model.setTime(view.getTimeChose());
             System.out.println("chosen values: " + view.getChose() + " " +  view.getTagChose()+ " " + view.getTimeChose());

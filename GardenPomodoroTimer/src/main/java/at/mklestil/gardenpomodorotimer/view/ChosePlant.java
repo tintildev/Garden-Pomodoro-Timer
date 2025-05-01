@@ -1,7 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
 import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
-import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
-import java.sql.Array;
 import java.util.ArrayList;
 
 /**

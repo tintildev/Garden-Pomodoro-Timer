@@ -6,10 +6,8 @@ import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.*;
 import javafx.scene.Scene;
-import javafx.scene.chart.Chart;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,10 +88,6 @@ public class MainController {
             ErrorHandler.showError("Error: Scene " + name + " not found");
         }
 
-    }
-
-    public void updateUI(){
-        //Todo: Update UI
     }
 
     public AppModel getModel() {

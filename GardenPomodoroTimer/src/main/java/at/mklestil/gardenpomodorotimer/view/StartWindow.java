@@ -26,7 +26,7 @@ public class StartWindow {
     private Button breakButton;
     private Button resetButton;
     private Label timeLabel;
-    private final Image[] plantStages = new Image[6];
+    private final Image[] plantStages = new Image[5];
     private ImageView plantImageView;
     private Button btnSettings;
     private Button btnChart;
@@ -47,7 +47,7 @@ public class StartWindow {
         VBox vBox = new VBox(5);
         HBox hbox = new HBox(5);
         startTree();
-        plantImageView = new ImageView(plantStages[0]);
+        plantImageView = new ImageView(plantStages[4]);
         plantImageView.setFitWidth(150);
         plantImageView.setFitHeight(150);
         progress = new ProgressBar();
@@ -118,6 +118,19 @@ public class StartWindow {
     }
 
     public void updateUI(){
+        String pathString = AppModel.getInstance().getSelectedPlant();
+        InputStream inputStream = getClass().getResourceAsStream(pathString);
+        if(inputStream != null){
+            //Check Image is correct
+            Image image = new Image(inputStream);
+            if(!image.isError()){
+                plantStages[4] = image;
+            }else {
+                System.out.println("Error loading image: " + pathString);
+            }
+        }else{
+            System.out.println("Image file not found.");
+        }
 
     }
 
@@ -127,7 +140,7 @@ public class StartWindow {
             //Check Image is correct
             Image image = new Image(inputStream);
             if(!image.isError()){
-                plantStages[0] = image;
+                plantStages[4] = image;
             }else {
                 System.out.println("Error loading image: " + "/images/start/start.png");
             }
@@ -183,11 +196,10 @@ public class StartWindow {
         imagePath = listImagePath;
         if(listImagePath.size() == 0){
             //Image Path, in the future delete hard codes
-            imagePath.add("/images/start/start.png");
-            imagePath.add("/images/start/start.png");
-            imagePath.add("/images/start/start.png");
-            imagePath.add("/images/start/start.png");
-            imagePath.add("/images/start/start.png");
+            imagePath.add("/images/tree/1_tree.png");
+            imagePath.add("/images/tree/2_tree.png");
+            imagePath.add("/images/tree/3_tree.png");
+            imagePath.add("/images/tree/4_tree.png");
             imagePath.add("/images/start/start.png");
         }
         // Add img plantStages

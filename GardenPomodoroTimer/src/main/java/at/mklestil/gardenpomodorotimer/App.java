@@ -1,13 +1,8 @@
 package at.mklestil.gardenpomodorotimer;
 
-import at.mklestil.gardenpomodorotimer.control.ChosePlantController;
-import at.mklestil.gardenpomodorotimer.control.StartWindowController;
 import at.mklestil.gardenpomodorotimer.control.MainController;
 import at.mklestil.gardenpomodorotimer.model.AppModel;
-import at.mklestil.gardenpomodorotimer.view.ChosePlant;
-import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
