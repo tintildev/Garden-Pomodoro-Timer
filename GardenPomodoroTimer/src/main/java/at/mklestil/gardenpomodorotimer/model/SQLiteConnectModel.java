@@ -136,6 +136,24 @@ public class SQLiteConnectModel {
         return tags;
     }
 
+    public void saveNewTagToDB(String tag) {
+        if (connection == null) {
+            System.out.println("Error: No valid database connection!");
+            return;
+        }
+
+        String sql = "INSERT INTO tags (name) VALUES (?)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, tag);
+            pstmt.executeUpdate();
+            System.out.println("tag saved: " + tag);
+        } catch (SQLException e) {
+            System.err.println("Error by save the tag: " + e.getMessage());
+        }
+
+    }
+
 
     //Create Table Images
     public void createTable() {

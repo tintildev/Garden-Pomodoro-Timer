@@ -73,7 +73,6 @@ public class ChosePlant {
     }
 
     private FlowPane getChoseContainer (){
-        //Todo: work on time chose and tag chose
         FlowPane choseContainer = new FlowPane();
 
         Label timeLabel = new Label();
@@ -126,7 +125,6 @@ public class ChosePlant {
     }
 
     private HBox getTagsContainer(ArrayList<String> tagsList){
-        //Todo:: Data from db
         HBox tagsContainer = new HBox();
         if(tagsList.size() == 0 || tagsList == null){
             tagsContainer.getChildren().add(new Label("no tag"));
