@@ -1,13 +1,11 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
-import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -219,6 +217,6 @@ public class StartWindowController {
         remainingTime = workTime;
         view.getTimeLabel().setText(formatTime(remainingTime));
         view.updateColor();
-        view.updateUI(); // update image
+        view.updateImage(); // update image
     }
 }

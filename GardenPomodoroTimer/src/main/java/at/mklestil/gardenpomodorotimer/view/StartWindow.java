@@ -117,7 +117,7 @@ public class StartWindow {
         root.setBackground(new Background(backgroundFill));
     }
 
-    public void updateUI(){
+    public void updateImage(){
         String pathString = AppModel.getInstance().getSelectedPlant();
         InputStream inputStream = getClass().getResourceAsStream(pathString);
         if(inputStream != null){

@@ -4,7 +4,7 @@ package at.mklestil.gardenpomodorotimer.model;
  * AppModel local data
  */
 public class AppModel {
-    private String selectedPlant = "start";
+    private String selectedPlant = "/images/start/start.png";
     private int time = 25;
     private String tag = "lernen";
     private String currentLanguage = "de";

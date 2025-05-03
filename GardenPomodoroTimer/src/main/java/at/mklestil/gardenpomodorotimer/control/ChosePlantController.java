@@ -1,11 +1,12 @@
 package at.mklestil.gardenpomodorotimer.control;
 
-import at.mklestil.gardenpomodorotimer.App;
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import at.mklestil.gardenpomodorotimer.view.TimesButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 
@@ -22,14 +23,24 @@ public class ChosePlantController {
         model = mainController.getModel();
         chosenPlant = model.getSelectedPlant();
         registerEventHandler();
-
-
-
     }
 
     private void registerEventHandler() {
         imageViewHandler();
         startButtonHandler();
+        timeBtnHandler();
+
+    }
+
+    private void timeBtnHandler() {
+        for(TimesButton btn : view.getTimes()){
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    view.setTimeChose(btn.getTimeValue());
+                }
+            });
+        }
     }
 
     private void imageViewHandler(){
@@ -38,7 +49,7 @@ public class ChosePlantController {
         for(ImageViewWithPath image: images){
             image.getImageView().addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
                 chosenPlant = image.getPath();
-                view.setChose(chosenPlant);
+                view.setChoseUpdateImage(chosenPlant);
                 System.out.println("Chose set: " + chosenPlant);
             });
         }

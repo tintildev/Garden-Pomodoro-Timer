@@ -1,6 +1,9 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -23,7 +26,11 @@ public class ChosePlant {
     private String tagChose = "learn";
     private ArrayList<String> plantList;
     private Image plantImage;
+    private ImageView choseImageView;
     private ArrayList<ImageViewWithPath> listOfImageViews = new ArrayList<>();
+    private ArrayList<TimesButton> times;
+
+    private StringProperty chosenStringProperty = new SimpleStringProperty("" + timeChose);
 
     private Button startBtn;
 
@@ -66,26 +73,27 @@ public class ChosePlant {
     }
 
     private FlowPane getChoseContainer (){
-        //Todo:: Data from db
+        //Todo: work on time chose and tag chose
         FlowPane choseContainer = new FlowPane();
-        /*
-        Label timeLabel = new Label("+" + timeChose);
+
+        Label timeLabel = new Label();
+        timeLabel.textProperty().bind(chosenStringProperty);
         Label tagLabel = new Label(tagChose);
         timeLabel.getStyleClass().add("label");
         tagLabel.getStyleClass().add("label");
-        InputStream inputStream = getClass().getResourceAsStream("/images/start/start.png");
+        InputStream inputStream = getClass().getResourceAsStream(AppModel.getInstance().getSelectedPlant());
         plantImage = new Image(inputStream);
-        ImageView imageView = new ImageView(plantImage);
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-        imageView.getStyleClass().add("image-view");
+        choseImageView = new ImageView(plantImage);
+        choseImageView.setFitWidth(50);
+        choseImageView.setFitHeight(50);
+        choseImageView.getStyleClass().add("image-view");
 
 
         choseContainer.getStyleClass().add("root");
         choseContainer.getChildren().add(timeLabel);
-        choseContainer.getChildren().add(imageView);
+        choseContainer.getChildren().add(choseImageView);
         choseContainer.getChildren().add(tagLabel);
-        */
+
         startBtn = new Button("start");
         startBtn.getStyleClass().add("start-button");
         choseContainer.getChildren().add(startBtn);
@@ -93,26 +101,25 @@ public class ChosePlant {
         return choseContainer;
     }
 
+    /**
+     * Methode give me buttons with time to chose
+     * @return
+     */
     private FlowPane getFocusTimeContainer (){
         FlowPane timesContainer = new FlowPane();
-        ArrayList<Integer> times = new ArrayList<Integer>();
-        times.add(10);
-        times.add(15);
-        times.add(25);
-        times.add(30);
-        times.add(50);
-        times.add(60);
-        times.add(90);
-        times.add(120);
-        for(Integer number : times){
-            Button tempTimeLabel = new Button("" + number);
-            tempTimeLabel.getStyleClass().add("button");
-            tempTimeLabel.setMinSize(40, 30);
-            tempTimeLabel.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                timeChose = number;
-            });
-            timesContainer.getChildren().add(tempTimeLabel);
+
+        times = new ArrayList<TimesButton>();
+        times.add(new TimesButton("10", 10));
+        times.add(new TimesButton("25", 25));
+        times.add(new TimesButton("30", 30));
+        times.add(new TimesButton("50", 50));
+        times.add(new TimesButton("60", 60));
+        times.add(new TimesButton("90",90));
+        times.add(new TimesButton("120",120));
+        for(TimesButton btn : times){
+            timesContainer.getChildren().add(btn);
         }
+
         timesContainer.getStyleClass().add("container");
 
         return timesContainer;
@@ -153,8 +160,16 @@ public class ChosePlant {
         return chose;
     }
 
-    public void setChose(String chose) {
+    /**
+     * Set Chose to update ui / image
+     * @param chose
+     */
+    public void setChoseUpdateImage(String chose) {
         this.chose = chose;
+        InputStream inputStream = getClass().getResourceAsStream(chose);
+        Image tempImage = new Image(inputStream);
+        choseImageView.setImage(tempImage);
+
     }
 
     public int getTimeChose() {
@@ -163,6 +178,7 @@ public class ChosePlant {
 
     public void setTimeChose(int timeChose) {
         this.timeChose = timeChose;
+        chosenStringProperty.set("" + this.timeChose);
     }
 
     public String getTagChose() {
@@ -176,4 +192,9 @@ public class ChosePlant {
     public ArrayList<ImageViewWithPath> getListOfImageViews() {
         return listOfImageViews;
     }
+
+    public ArrayList<TimesButton> getTimes() {
+        return times;
+    }
 }
+
