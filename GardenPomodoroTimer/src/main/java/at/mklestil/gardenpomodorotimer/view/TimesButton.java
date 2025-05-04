@@ -2,6 +2,9 @@ package at.mklestil.gardenpomodorotimer.view;
 
 import javafx.scene.control.Button;
 
+/**
+ * TimesButton inherits from the Button class and has been extended so that it can store/pass an int value.
+ */
 public class TimesButton extends Button {
     private int timeValue = 0;
 

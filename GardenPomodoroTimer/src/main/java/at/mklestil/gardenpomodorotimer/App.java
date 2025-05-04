@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * The main class, to run the app in javafx.
+ */
 public class App extends Application {
 
     @Override
