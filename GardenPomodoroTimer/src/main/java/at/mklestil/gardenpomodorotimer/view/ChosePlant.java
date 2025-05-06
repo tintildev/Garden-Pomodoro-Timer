@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -29,6 +31,7 @@ public class ChosePlant {
     private ImageView choseImageView;
     private ArrayList<ImageViewWithPath> listOfImageViews = new ArrayList<>();
     private ArrayList<TimesButton> times;
+    private Slider timeSlider =  new Slider(1.0, 120.0,1.0);
 
     private StringProperty chosenStringProperty = new SimpleStringProperty("" + timeChose);
 
@@ -37,7 +40,7 @@ public class ChosePlant {
     public ChosePlant(){
         root = new VBox();
         FlowPane plantContainer = getPlantContainer();
-        FlowPane fokusTimeContainer = getFocusTimeContainer();
+        VBox fokusTimeContainer = getFocusTimeContainer();
         HBox tagsContainer = getTagsContainer(new ArrayList<String>());
         FlowPane choseContainer = getChoseContainer();
 
@@ -104,8 +107,9 @@ public class ChosePlant {
      * Methode give me buttons with time to chose
      * @return
      */
-    private FlowPane getFocusTimeContainer (){
-        FlowPane timesContainer = new FlowPane();
+    private VBox getFocusTimeContainer (){
+        VBox timesContainer = new VBox();
+        FlowPane buttonsContainer = new FlowPane();
 
         times = new ArrayList<TimesButton>();
         times.add(new TimesButton("10", 10));
@@ -116,9 +120,13 @@ public class ChosePlant {
         times.add(new TimesButton("90",90));
         times.add(new TimesButton("120",120));
         for(TimesButton btn : times){
-            timesContainer.getChildren().add(btn);
+            buttonsContainer.getChildren().add(btn);
         }
-
+        buttonsContainer.getStyleClass().add("container");
+        timesContainer.getChildren().add(buttonsContainer);
+        timesContainer.getChildren().add(new Separator());
+        timesContainer.getChildren().add(timeSlider);
+        timesContainer.getChildren().add(new Label(Double.toString(timeSlider.getValue())));
         timesContainer.getStyleClass().add("container");
 
         return timesContainer;
