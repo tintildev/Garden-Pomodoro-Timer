@@ -31,8 +31,7 @@ public class ChosePlant {
     private ImageView choseImageView;
     private ArrayList<ImageViewWithPath> listOfImageViews = new ArrayList<>();
     private ArrayList<TimesButton> times;
-    private Slider timeSlider =  new Slider(1.0, 120.0,1.0);
-
+    private Slider timeSlider =  new Slider(1.0, 120.0, timeChose);
     private StringProperty chosenStringProperty = new SimpleStringProperty("" + timeChose);
 
     private Button startBtn;
@@ -77,8 +76,7 @@ public class ChosePlant {
 
     private FlowPane getChoseContainer (){
         FlowPane choseContainer = new FlowPane();
-
-        Label timeLabel = new Label();
+        Label timeLabel = new Label("Test");
         timeLabel.textProperty().bind(chosenStringProperty);
         Label tagLabel = new Label(tagChose);
         timeLabel.getStyleClass().add("label");
@@ -122,11 +120,13 @@ public class ChosePlant {
         for(TimesButton btn : times){
             buttonsContainer.getChildren().add(btn);
         }
+        Label tempLabel = new Label();
+        tempLabel.textProperty().bind(chosenStringProperty);
         buttonsContainer.getStyleClass().add("container");
         timesContainer.getChildren().add(buttonsContainer);
         timesContainer.getChildren().add(new Separator());
         timesContainer.getChildren().add(timeSlider);
-        timesContainer.getChildren().add(new Label(Double.toString(timeSlider.getValue())));
+        timesContainer.getChildren().add(tempLabel);
         timesContainer.getStyleClass().add("container");
 
         return timesContainer;
@@ -144,10 +144,6 @@ public class ChosePlant {
         }
         tagsContainer.getStyleClass().add("container");
         return tagsContainer;
-    }
-
-    private void showListOfTrees(){
-        //Todo:: Trees load
     }
 
     private void showListOfTags(){
@@ -201,6 +197,10 @@ public class ChosePlant {
 
     public ArrayList<TimesButton> getTimes() {
         return times;
+    }
+
+    public Slider getTimeSlider() {
+        return timeSlider;
     }
 }
 

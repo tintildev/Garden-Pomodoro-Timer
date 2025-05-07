@@ -4,6 +4,8 @@ import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.model.ImageViewWithPath;
 import at.mklestil.gardenpomodorotimer.view.ChosePlant;
 import at.mklestil.gardenpomodorotimer.view.TimesButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -29,7 +31,7 @@ public class ChosePlantController {
         imageViewHandler();
         startButtonHandler();
         timeBtnHandler();
-
+        timeSliderHandler();
     }
 
     private void timeBtnHandler() {
@@ -41,6 +43,15 @@ public class ChosePlantController {
                 }
             });
         }
+    }
+
+    private void timeSliderHandler(){
+        view.getTimeSlider().valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                view.setTimeChose(newValue.intValue());
+            }
+        });
     }
 
     private void imageViewHandler(){
