@@ -50,7 +50,7 @@ public class StartWindowController {
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
         view.getTagLabel().setText(model.getTag());
-        //Todo:: InitialTrees with Data from DB
+        //Todo:: InitialTrees with Data from DB, dynamic growth state
         view.initialTrees(new ArrayList<String>());
         switchScene();
     }

@@ -24,7 +24,4 @@ public class ChartController {
         view.showData(sessionData);
     }
 
-
-    //Todo: Load data from DB
-
 }
