@@ -1,8 +1,6 @@
 package at.mklestil.gardenpomodorotimer.control;
 
-import at.mklestil.gardenpomodorotimer.model.AppModel;
-import at.mklestil.gardenpomodorotimer.model.PomodoroSession;
-import at.mklestil.gardenpomodorotimer.model.SQLiteConnectModel;
+import at.mklestil.gardenpomodorotimer.model.*;
 import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import at.mklestil.gardenpomodorotimer.view.*;
 import javafx.scene.Scene;
@@ -11,13 +9,15 @@ import javafx.stage.Stage;
 import java.util.List;
 
 /**
-Manages view, logic, takes care of event handling, switch scenes.
+ * Manages view, logic, takes care of event handling, switch scenes.
  */
 public class MainController {
 
     private final Stage stage;
     private AppModel model;
-    private SQLiteConnectModel sqLiteConnectModel;
+    private ImagesDAO imagesDAO;
+    private SessionDAO sessionDAO;
+    private TagDAO tagDAO;
     private int appWidth = 280;
     private int appHeight = 420;
     private Scene startScene;
@@ -31,7 +31,6 @@ public class MainController {
     public MainController(Stage stage, AppModel model) {
         this.model = model;
         this.stage = stage;
-        sqLiteConnectModel = new SQLiteConnectModel();
 
         // Set language before views are loaded
         LanguageManager.getInstance();
@@ -95,35 +94,30 @@ public class MainController {
     }
 
     private void startDBs() {
-        createSessionsDB();
-        createTagDB();
+        imagesDAO = new ImagesDAO();
+        sessionDAO = new SessionDAO();
+        tagDAO = new TagDAO();
+
+        // Create tables if not exists
+        imagesDAO.createTable();
+        sessionDAO.createTable();
+        tagDAO.createTable();
 
     }
 
-    private void createSessionsDB() {
-        //Initial DB
-        sqLiteConnectModel.connect();
-        sqLiteConnectModel.createTablePomodoroSessions();
+
+    public void saveSession(int duration, String plant) {
+        String timestamp = "" + System.currentTimeMillis();
+        sessionDAO.insert(new PomodoroSession(duration, plant, timestamp));
     }
 
-    public void saveSession(int time, String plant) {
-        sqLiteConnectModel.saveSession(time, plant);
+    public List<PomodoroSession> loadSessionsFromDB() {
+        return sessionDAO.findAll();
     }
 
-    public List<PomodoroSession> loadSessionsFromDB(){
-        return sqLiteConnectModel.loadPomodoroSessions();
-    }
-
-
-
-    private void createTagDB() {
-        //Initial DB
-        sqLiteConnectModel.connect();
-        sqLiteConnectModel.createTagsTable();
-    }
 
     public List<String> loadTagsFromDB() {
-        return sqLiteConnectModel.loadTagsFromDB();
+        tagDAO.findAll();
     }
 
     public void changeLanugage() {
