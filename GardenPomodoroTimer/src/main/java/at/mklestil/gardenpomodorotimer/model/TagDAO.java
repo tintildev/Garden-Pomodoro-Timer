@@ -71,8 +71,14 @@ public class TagDAO implements DAO<AppModel>{
     }
 
     @Override
-    public List<Object> findAll() {
-        return null;
+    public ArrayList findAll() {
+        ArrayList<String> tags = new ArrayList<>();
+        if (connection == null) {
+            System.out.println("Error: No valid database connection!");
+            return tags;
+        }
+        //TODO implement findAll method
+        return tags;
     }
 
 

@@ -2,6 +2,7 @@ package at.mklestil.gardenpomodorotimer.model;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DAO<T> {
@@ -18,5 +19,5 @@ public interface DAO<T> {
 
     public Object findById(int id);
 
-    public List<T> findAll();
+    public ArrayList findAll();
 }

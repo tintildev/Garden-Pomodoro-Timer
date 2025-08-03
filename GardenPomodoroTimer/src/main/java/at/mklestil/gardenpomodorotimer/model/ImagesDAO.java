@@ -3,6 +3,7 @@ package at.mklestil.gardenpomodorotimer.model;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImagesDAO implements DAO<AppModel>{
@@ -65,7 +66,8 @@ public class ImagesDAO implements DAO<AppModel>{
     }
 
     @Override
-    public List<AppModel> findAll() {
+    public ArrayList findAll() {
+        //TODO implement findAll method
         return null;
     }
 

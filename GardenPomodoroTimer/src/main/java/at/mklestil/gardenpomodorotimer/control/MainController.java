@@ -117,7 +117,9 @@ public class MainController {
 
 
     public List<String> loadTagsFromDB() {
-        tagDAO.findAll();
+        //TODO
+        List<String> tags = tagDAO.findAll();
+        return tags;
     }
 
     public void changeLanugage() {

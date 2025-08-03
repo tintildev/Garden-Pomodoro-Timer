@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionDAO implements DAO<PomodoroSession>{
@@ -84,7 +85,30 @@ public class SessionDAO implements DAO<PomodoroSession>{
     }
 
     @Override
-    public List<PomodoroSession> findAll() {
-        return null;
+    public ArrayList<PomodoroSession> findAll() {
+        if (connection == null) {
+            System.out.println("Error: No valid database connection!");
+            return null;
+        }
+        //TODO implement findAll method
+        String sql = "SELECT * FROM pomodoro_sessions";
+        ArrayList<PomodoroSession> sessions = new ArrayList<>();
+        try (Statement stmt = connection.createStatement();
+             var rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int duration = rs.getInt("duration");
+                String plantChoice = rs.getString("plant_choice");
+                String timestamp = rs.getString("timestamp");
+                sessions.add(new PomodoroSession(id, duration, plantChoice, timestamp));
+            }
+            return sessions;
+        } catch (SQLException e) {
+            System.err.println("Error retrieving sessions: " + e.getMessage());
+        }
+
+
+
+        return sessions;
     }
 }
