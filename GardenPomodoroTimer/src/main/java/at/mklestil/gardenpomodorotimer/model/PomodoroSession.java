@@ -16,6 +16,10 @@ public class PomodoroSession {
         this.timestamp = timestamp;
     }
 
+    public PomodoroSession(int duration, String plantChoice, String timestamp) {
+        this(0, duration, plantChoice, timestamp); // Default ID to 0 for new sessions
+    }
+
     public int getId() { return id; }
     public int getDuration() { return duration; }
     public String getPlantChoice() { return plantChoice; }
