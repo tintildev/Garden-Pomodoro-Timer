@@ -54,7 +54,11 @@ public class StartWindow {
         hbox.getChildren().addAll(plus, progress, minus);
         HBox buttonBox = new HBox(5);
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
-        vBox.getChildren().addAll(plantImageView, tagLabel, hbox, buttonBox);
+
+        //Tags
+
+
+        vBox.getChildren().addAll(plantImageView, new Label("Tags:"), tagLabel, hbox, buttonBox);
 
         //Status and Time
         BorderPane topPane = new BorderPane();
