@@ -2,15 +2,14 @@ package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
+import at.mklestil.gardenpomodorotimer.view.TagSelectionDialog;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
-import javafx.scene.control.ChoiceDialog;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class StartWindowController {
     private StartWindow view;
@@ -151,32 +150,17 @@ public class StartWindowController {
         view.getBreakButton().setDisable(true);
     }
 
+
+    // Todo: Add Tags ...
     private void showTagSelectionDialog() {
-        List<String> tags = mainController.loadTagsFromDB();
-        if (tags.isEmpty()) {
-            System.out.println("Keine Tags vorhanden.");
-            ChoiceDialog<String> dialog = new ChoiceDialog<>(model.getTag());
-            dialog.setTitle("Tag auswählen");
-            dialog.setHeaderText("Wähle einen Tag für deine Session:");
-            dialog.setContentText("Tag:");
+        TagSelectionService tagService = new TagSelectionService(mainController, model);
+        TagSelectionDialog tagDialog = new TagSelectionDialog();
 
-            Optional<String> result = dialog.showAndWait();
-            result.ifPresent(selectedTag -> {
-                model.setTag(selectedTag); // save at model
-                view.getTagLabel().setText(selectedTag); // UI
-            });
-        }else{
-            ChoiceDialog<String> dialog = new ChoiceDialog<>(tags.get(0), tags);
-            dialog.setTitle("Tag auswählen");
-            dialog.setHeaderText("Wähle einen Tag für deine Session:");
-            dialog.setContentText("Tag:");
-
-            Optional<String> result = dialog.showAndWait();
-            result.ifPresent(selectedTag -> {
-                model.setTag(selectedTag); // save at model
-                view.getTagLabel().setText(selectedTag); // UI
-            });
-        }
+        List<String> tags = tagService.getAvailableTags();
+        tagDialog.show(tags).ifPresent(selectedTag -> {
+            model.setTag(selectedTag);
+            view.getTagLabel().setText(selectedTag);
+        });
     }
 
     public void plusTime() {
