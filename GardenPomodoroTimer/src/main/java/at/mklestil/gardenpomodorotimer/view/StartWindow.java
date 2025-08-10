@@ -21,7 +21,7 @@ public class StartWindow {
     private Button plus = new Button("+");
     private Button minus = new Button("-");
     private ProgressBar progress;
-    private Label tagLabel = new Label("");
+    private Button selectTagButton = new Button("");
     private Button startButton;
     private Button breakButton;
     private Button resetButton;
@@ -30,6 +30,7 @@ public class StartWindow {
     private ImageView plantImageView;
     private Button btnSettings;
     private Button btnChart;
+    private Button addTagsButton = new Button("+");
 
     public StartWindow() {
         root = new BorderPane();
@@ -56,9 +57,12 @@ public class StartWindow {
         buttonBox.getChildren().addAll(startButton, breakButton, resetButton);
 
         //Tags
+        //Todo: Style for HBox
+        HBox tagsBox = new HBox(5);
+        tagsBox.getChildren().add(addTagsButton);
+        tagsBox.getChildren().add(selectTagButton);
 
-
-        vBox.getChildren().addAll(plantImageView, new Label("Tags:"), tagLabel, hbox, buttonBox);
+        vBox.getChildren().addAll(plantImageView, new Label("Tags:"), tagsBox, hbox, buttonBox);
 
         //Status and Time
         BorderPane topPane = new BorderPane();
@@ -91,7 +95,7 @@ public class StartWindow {
         );
 
         // CSS Classes
-        tagLabel.getStyleClass().add("tagLabel");
+        selectTagButton.getStyleClass().add("tagLabel");
         status.getStyleClass().add("statusLabel");
         timeLabel.getStyleClass().add("timeLabel");
 
@@ -273,12 +277,8 @@ public class StartWindow {
         this.plantImageView = plantImageView;
     }
 
-    public Label getTagLabel() {
-        return tagLabel;
-    }
-
-    public void setTagLabel(Label tagLabel) {
-        this.tagLabel = tagLabel;
+    public Button getSelectTagButton() {
+        return selectTagButton;
     }
 
     public Button getBtnSettings() {

@@ -44,11 +44,11 @@ public class StartWindowController {
         view.getStartButton().setOnAction(e -> startTimer());
         view.getBreakButton().setOnAction(e -> pauseTimer());
         view.getResetButton().setOnAction(e -> resetTimer());
-        view.getTagLabel().setOnMouseClicked(event -> showTagSelectionDialog());
+        view.getSelectTagButton().setOnMouseClicked(event -> showTagSelectionDialog());
 
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
-        view.getTagLabel().setText(model.getTag());
+        view.getSelectTagButton().setText(model.getTag());
         //Todo:: InitialTrees with Data from DB, dynamic growth state
         view.initialTrees(new ArrayList<String>());
         switchScene();
@@ -159,7 +159,7 @@ public class StartWindowController {
         List<String> tags = tagService.getAvailableTags();
         tagDialog.show(tags).ifPresent(selectedTag -> {
             model.setTag(selectedTag);
-            view.getTagLabel().setText(selectedTag);
+            view.getSelectTagButton().setText(selectedTag);
         });
     }
 
@@ -196,7 +196,7 @@ public class StartWindowController {
 
     public void updateView(){
         System.out.println("Scene switch to Start, update view!");
-        view.getTagLabel().setText(model.getTag());
+        view.getSelectTagButton().setText(model.getTag());
         setWorkTime(model.getTime() * 60);
         remainingTime = workTime;
         view.getTimeLabel().setText(formatTime(remainingTime));
