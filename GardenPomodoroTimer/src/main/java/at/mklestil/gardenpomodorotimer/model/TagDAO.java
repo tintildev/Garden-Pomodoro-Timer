@@ -76,8 +76,19 @@ public class TagDAO implements DAO<AppModel>{
         if (connection == null) {
             System.out.println("Error: No valid database connection!");
             return tags;
+        }else{
+            String sql = "SELECT name FROM tags";
+            try (Statement stmt = connection.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
+
+                while (rs.next()) {
+                    String tagName = rs.getString("name");
+                    tags.add(tagName);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error retrieving tags: " + e.getMessage());
+            }
         }
-        //TODO implement findAll method
         return tags;
     }
 

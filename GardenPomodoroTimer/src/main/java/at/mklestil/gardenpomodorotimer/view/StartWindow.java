@@ -84,6 +84,7 @@ public class StartWindow {
         hbox.setStyle("-fx-alignment: center;");
         buttonBox.setStyle("-fx-alignment: center;");
         vBox.setStyle("-fx-alignment: center;");
+        tagsBox.setStyle("-fx-alignment: center;");
         BorderPane.setAlignment(status, Pos.CENTER);
         BorderPane.setAlignment(timeLabel, Pos.CENTER);
 

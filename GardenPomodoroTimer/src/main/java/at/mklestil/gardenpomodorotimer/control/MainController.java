@@ -6,6 +6,7 @@ import at.mklestil.gardenpomodorotimer.view.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,9 +107,9 @@ public class MainController {
     }
 
 
-    public void saveSession(int duration, String plant) {
+    public void saveSession(int duration, String plant, String tag) {
         String timestamp = "" + System.currentTimeMillis();
-        sessionDAO.insert(new PomodoroSession(duration, plant, timestamp));
+        sessionDAO.insert(new PomodoroSession(duration, plant, timestamp, tag));
     }
 
     public List<PomodoroSession> loadSessionsFromDB() {
@@ -116,10 +117,15 @@ public class MainController {
     }
 
 
-    public List<String> loadTagsFromDB() {
+    public ArrayList<String> loadTagsFromDB() {
         //TODO
-        List<String> tags = tagDAO.findAll();
-        return tags;
+        return tagDAO.findAll();
+    }
+
+    public void saveTag(String tag) {
+        //TODO
+        model.setTag(tag);
+        tagDAO.insert(model);
     }
 
     public void changeLanugage() {

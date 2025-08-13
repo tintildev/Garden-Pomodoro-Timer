@@ -6,7 +6,7 @@ package at.mklestil.gardenpomodorotimer.model;
 public class AppModel {
     private String selectedPlant = "/images/start/start.png";
     private int time = 25;
-    private String tag = "lernen";
+    private String tag = "tag auswählen";
     private String currentLanguage = "de";
     private static AppModel instance;
     private String backgroundColor = "#55C57A";

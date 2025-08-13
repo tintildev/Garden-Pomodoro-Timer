@@ -37,7 +37,8 @@ public class SessionDAO implements DAO<PomodoroSession>{
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 duration INTEGER NOT NULL,
                 plant_choice TEXT NOT NULL,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                tag TEXT NOT NULL
             );
             """;
 
@@ -62,6 +63,7 @@ public class SessionDAO implements DAO<PomodoroSession>{
             pstmt.setInt(1, model.getDuration());
             pstmt.setString(2, model.getPlantChoice());
             // timestamp = SQLite automatically sets the current time in UTC format (YYYY-MM-DD HH:MM:SS)
+            pstmt.setString(4, model.getTag());
             pstmt.executeUpdate();
             System.out.println("Session saved: " + model.getDuration() + " min, plant: " + model.getPlantChoice());
         } catch (SQLException e) {
@@ -100,7 +102,8 @@ public class SessionDAO implements DAO<PomodoroSession>{
                 int duration = rs.getInt("duration");
                 String plantChoice = rs.getString("plant_choice");
                 String timestamp = rs.getString("timestamp");
-                sessions.add(new PomodoroSession(id, duration, plantChoice, timestamp));
+                String tag = rs.getString("tag");
+                sessions.add(new PomodoroSession(id, duration, plantChoice, timestamp, tag));
             }
             return sessions;
         } catch (SQLException e) {

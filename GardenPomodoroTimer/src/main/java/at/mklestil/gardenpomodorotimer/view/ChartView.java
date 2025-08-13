@@ -37,8 +37,11 @@ public class ChartView {
         TableColumn<PomodoroSession, String> timestampColumn = new TableColumn<>("Timestamp");
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
+        TableColumn<PomodoroSession, String> tag = new TableColumn<>("Tag");
+        timestampColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
+
         // Spalten zur TableView hinzufügen
-        tableView.getColumns().addAll(idColumn, durationColumn, plantColumn, timestampColumn);
+        tableView.getColumns().addAll(idColumn, durationColumn, plantColumn, timestampColumn, tag);
         tableView.setItems(sessionData);
         tableView.refresh();
     }

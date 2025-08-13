@@ -1,5 +1,6 @@
 package at.mklestil.gardenpomodorotimer.view;
 
+import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import javafx.scene.control.ChoiceDialog;
 
 import java.util.List;
@@ -15,9 +16,9 @@ public class TagSelectionDialog extends ChoiceDialog<String> {
     public TagSelectionDialog(List<String> tags) {
         //Todo: LanguageManager
         super(tags.get(0), tags);
-        this.setTitle("Tag auswählen");
-        this.setHeaderText("Wähle einen Tag für deine Session:");
-        this.setContentText("Tag:");
+        this.setTitle(LanguageManager.getInstance().getBundle().getString("selectTagTitle"));
+        this.setHeaderText(LanguageManager.getInstance().getBundle().getString("sleectTagHeader"));
+        this.setContentText(LanguageManager.getInstance().getBundle().getString("selectTagContent"));
     }
 
     public Optional<String> show(List<String> tags) {

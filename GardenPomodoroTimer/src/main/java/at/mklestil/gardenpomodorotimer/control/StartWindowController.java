@@ -1,6 +1,7 @@
 package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
+import at.mklestil.gardenpomodorotimer.model.TagDAO;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
 import at.mklestil.gardenpomodorotimer.view.TagAddDialog;
 import at.mklestil.gardenpomodorotimer.view.TagSelectionDialog;
@@ -11,6 +12,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StartWindowController {
     private StartWindow view;
@@ -46,7 +48,7 @@ public class StartWindowController {
         view.getBreakButton().setOnAction(e -> pauseTimer());
         view.getResetButton().setOnAction(e -> resetTimer());
         view.getSelectTagButton().setOnMouseClicked(event -> showTagSelectionDialog());
-        view.getAddTagsButton().setOnAction(event -> new TagAddDialog().show());
+        view.getAddTagsButton().setOnAction(event -> addTagDialog());
 
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
@@ -103,7 +105,7 @@ public class StartWindowController {
         else if (remainingTime == 0){
             // Finish Timer
             view.getStatus().setText("Great Job!");
-            mainController.saveSession(workTime / 60, sessionObject); // save data in db
+            mainController.saveSession(workTime / 60, sessionObject, model.getTag()); // save data in db
             timeline.stop(); // stop timeline
         }else {
             // Timer-Ende
@@ -154,6 +156,12 @@ public class StartWindowController {
 
 
     // Todo: Add Tags ...
+    private void addTagDialog(){
+        TagAddDialog addTagDialog = new TagAddDialog();
+        Optional<String> result = addTagDialog.showAndWait();
+        result.ifPresent(value -> mainController.saveTag(value));
+
+    }
     private void showTagSelectionDialog() {
         TagSelectionService tagService = new TagSelectionService(mainController, model);
         List<String> tags = tagService.getAvailableTags();
