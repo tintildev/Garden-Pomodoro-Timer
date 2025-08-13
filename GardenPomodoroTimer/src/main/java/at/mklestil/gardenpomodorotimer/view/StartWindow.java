@@ -288,4 +288,8 @@ public class StartWindow {
     public Button getBtnChart() {
         return btnChart;
     }
+
+    public Button getAddTagsButton() {
+        return addTagsButton;
+    }
 }

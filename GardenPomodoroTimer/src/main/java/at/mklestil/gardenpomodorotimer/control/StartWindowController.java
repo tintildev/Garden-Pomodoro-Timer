@@ -2,6 +2,7 @@ package at.mklestil.gardenpomodorotimer.control;
 
 import at.mklestil.gardenpomodorotimer.model.AppModel;
 import at.mklestil.gardenpomodorotimer.view.StartWindow;
+import at.mklestil.gardenpomodorotimer.view.TagAddDialog;
 import at.mklestil.gardenpomodorotimer.view.TagSelectionDialog;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -45,6 +46,7 @@ public class StartWindowController {
         view.getBreakButton().setOnAction(e -> pauseTimer());
         view.getResetButton().setOnAction(e -> resetTimer());
         view.getSelectTagButton().setOnMouseClicked(event -> showTagSelectionDialog());
+        view.getAddTagsButton().setOnAction(event -> new TagAddDialog().show());
 
         view.getPlus().setOnAction(e -> plusTime());
         view.getMinus().setOnAction(e -> minusTime());
@@ -154,9 +156,10 @@ public class StartWindowController {
     // Todo: Add Tags ...
     private void showTagSelectionDialog() {
         TagSelectionService tagService = new TagSelectionService(mainController, model);
-        TagSelectionDialog tagDialog = new TagSelectionDialog();
-
         List<String> tags = tagService.getAvailableTags();
+        TagSelectionDialog tagDialog = new TagSelectionDialog(tags);
+
+
         tagDialog.show(tags).ifPresent(selectedTag -> {
             model.setTag(selectedTag);
             view.getSelectTagButton().setText(selectedTag);
