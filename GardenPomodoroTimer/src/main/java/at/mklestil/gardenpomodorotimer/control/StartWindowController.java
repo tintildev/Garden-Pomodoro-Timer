@@ -160,7 +160,7 @@ public class StartWindowController {
     }
 
 
-    // Todo: Add Tags ...
+    // Todo: Edit Tags ...
     private void addTagDialog(){
         TagAddDialog addTagDialog = new TagAddDialog();
         Optional<String> result = addTagDialog.showAndWait();
