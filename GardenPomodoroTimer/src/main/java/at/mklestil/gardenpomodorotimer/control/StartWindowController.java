@@ -107,10 +107,16 @@ public class StartWindowController {
             view.getStatus().setText("Great Job!");
             mainController.saveSession(workTime / 60, sessionObject, model.getTag()); // save data in db
             timeline.stop(); // stop timeline
+            resetButtonsToStart();
         }else {
             // Timer-Ende
             pauseTimer();
         }
+    }
+
+    private void resetButtonsToStart(){
+        view.getStartButton().setDisable(false);
+        view.getBreakButton().setDisable(true);
     }
 
     public void startTimer(){
@@ -150,8 +156,7 @@ public class StartWindowController {
         view.getProgress().setProgress(progress); // reset progress
         view.getPlantImageView().setImage(view.getPlantStages()[0]); //reset image
         switchCheck = true; //allaow switch scene
-        view.getStartButton().setDisable(false);
-        view.getBreakButton().setDisable(true);
+        resetButtonsToStart();
     }
 
 
