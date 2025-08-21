@@ -5,9 +5,13 @@ import at.mklestil.gardenpomodorotimer.view.ChartView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChartController {
     private MainController mainController;
     private ChartView view;
+    private final ObservableList<PomodoroSession> sessionData = FXCollections.observableArrayList();
 
     public ChartController(MainController mainController, ChartView view){
         this.view = view;
@@ -20,8 +24,12 @@ public class ChartController {
     }
 
     private void setDataToTable() {
-        ObservableList<PomodoroSession> sessionData = FXCollections.observableArrayList(mainController.loadSessionsFromDB());
+        sessionData.setAll(mainController.loadSessionsFromDB());
         view.showData(sessionData);
+    }
+
+    public void updateView(){
+        sessionData.setAll(mainController.loadSessionsFromDB());
     }
 
 }

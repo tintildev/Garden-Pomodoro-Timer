@@ -57,13 +57,13 @@ public class SessionDAO implements DAO<PomodoroSession>{
             return;
         }
 
-        String sql = "INSERT INTO pomodoro_sessions (duration, plant_choice) VALUES (?, ?)";
+        String sql = "INSERT INTO pomodoro_sessions (duration, plant_choice, tag) VALUES (?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, model.getDuration());
             pstmt.setString(2, model.getPlantChoice());
             // timestamp = SQLite automatically sets the current time in UTC format (YYYY-MM-DD HH:MM:SS)
-            pstmt.setString(4, model.getTag());
+            pstmt.setString(3, model.getTag());
             pstmt.executeUpdate();
             System.out.println("Session saved: " + model.getDuration() + " min, plant: " + model.getPlantChoice());
         } catch (SQLException e) {

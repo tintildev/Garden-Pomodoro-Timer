@@ -28,6 +28,7 @@ public class MainController {
     private StartWindowController startController;
     private ChosePlantController chosePlantController;
     private SettingsController settingsController;
+    private ChartController chartController;
 
     public MainController(Stage stage, AppModel model) {
         this.model = model;
@@ -63,7 +64,7 @@ public class MainController {
 
         //Chart
         ChartView chartView = new ChartView();
-        ChartController chartController = new ChartController(this, chartView);
+        chartController = new ChartController(this, chartView);
         chartScene = new Scene(chartView.getRoot(), appWidth, appHeight);
 
     }
@@ -82,6 +83,7 @@ public class MainController {
         } else if (name.equals("settings")) {
             stage.setScene(settingsScene);
         } else if (name.equals("chart")) {
+            chartController.updateView();
             stage.setScene(chartScene);
         } else {
             System.out.println("Error: Scene " + name + " not found");
