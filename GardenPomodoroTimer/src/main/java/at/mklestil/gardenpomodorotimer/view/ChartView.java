@@ -17,6 +17,10 @@ public class ChartView {
     private VBox root;
     private Button backBtn = new Button(LanguageManager.getInstance().getBundle().getString("homeButton"));
     private TableView tableView = new TableView();
+    private TableColumn<PomodoroSession, Integer> idColumn = new TableColumn<>(LanguageManager.getInstance().getBundle().getString("idColumn"));
+    private TableColumn<PomodoroSession, Integer> durationColumn = new TableColumn<>(LanguageManager.getInstance().getBundle().getString("durationColumn"));
+    private TableColumn<PomodoroSession, String> plantColumn = new TableColumn<>(LanguageManager.getInstance().getBundle().getString("plantColumn"));
+    private TableColumn<PomodoroSession, String> timestampColumn = new TableColumn<>(LanguageManager.getInstance().getBundle().getString("timestampColumn"));
 
     public ChartView(){
         root = new VBox();
@@ -29,20 +33,21 @@ public class ChartView {
 
     private void updateTexts() {
         backBtn.setText(LanguageManager.getInstance().getBundle().getString("homeButton"));
+        updateColumnHeaders();
+    }
+
+    private void updateColumnHeaders() {
+        idColumn.setText(LanguageManager.getInstance().getBundle().getString("idColumn"));
+        durationColumn.setText(LanguageManager.getInstance().getBundle().getString("durationColumn"));
+        plantColumn.setText(LanguageManager.getInstance().getBundle().getString("plantColumn"));
+        timestampColumn.setText(LanguageManager.getInstance().getBundle().getString("timestampColumn"));
     }
 
     public void showData(ObservableList<PomodoroSession> sessionData) {
         System.out.println(sessionData);
-        TableColumn<PomodoroSession, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-        TableColumn<PomodoroSession, Integer> durationColumn = new TableColumn<>("Duration");
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
-
-        TableColumn<PomodoroSession, String> plantColumn = new TableColumn<>("Plant");
         plantColumn.setCellValueFactory(new PropertyValueFactory<>("plantChoice"));
-
-        TableColumn<PomodoroSession, String> timestampColumn = new TableColumn<>("Timestamp");
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
         // Spalten zur TableView hinzufügen
