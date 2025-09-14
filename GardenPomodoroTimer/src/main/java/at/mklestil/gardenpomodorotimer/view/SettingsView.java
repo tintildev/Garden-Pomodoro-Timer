@@ -15,7 +15,7 @@ public class SettingsView {
 
     private VBox root = new VBox();
     private ComboBox<String> languageBox;
-    private Button backBtn = new Button("Start");
+    private Button backBtn = new Button(LanguageManager.getInstance().getBundle().getString("homeButton"));
 
     private ColorPicker colorPicker = new ColorPicker(Color.web(AppModel.getInstance().getBackgroundColor()));
 
@@ -29,8 +29,14 @@ public class SettingsView {
         flowPane.getChildren().addAll(infoLabel, languageBox);
         root.getChildren().addAll(flowPane, colorPicker, backBtn);
 
+        //updateTexts
+        updateTexts();
+        LanguageManager.getInstance().addLanguageChangeListener(this::updateTexts);
 
+    }
 
+    private void updateTexts() {
+        backBtn.setText(LanguageManager.getInstance().getBundle().getString("homeButton"));
     }
 
     public VBox getRoot() {

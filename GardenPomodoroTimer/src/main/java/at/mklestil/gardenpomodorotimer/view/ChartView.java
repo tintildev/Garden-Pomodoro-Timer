@@ -1,6 +1,7 @@
 package at.mklestil.gardenpomodorotimer.view;
 
 import at.mklestil.gardenpomodorotimer.model.PomodoroSession;
+import at.mklestil.gardenpomodorotimer.service.LanguageManager;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -14,13 +15,20 @@ import javafx.scene.layout.VBox;
  */
 public class ChartView {
     private VBox root;
-    private Button backBtn = new Button("Start");
+    private Button backBtn = new Button(LanguageManager.getInstance().getBundle().getString("homeButton"));
     private TableView tableView = new TableView();
 
     public ChartView(){
         root = new VBox();
         root.getChildren().addAll(tableView, backBtn);
 
+        //updateTexts
+        updateTexts();
+        LanguageManager.getInstance().addLanguageChangeListener(this::updateTexts);
+    }
+
+    private void updateTexts() {
+        backBtn.setText(LanguageManager.getInstance().getBundle().getString("homeButton"));
     }
 
     public void showData(ObservableList<PomodoroSession> sessionData) {
